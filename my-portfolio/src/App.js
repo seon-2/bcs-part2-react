@@ -6,21 +6,16 @@ function App() {
   // max-w-screen-xl: 1280px 이상 커지지 않음.
   // mx-auto : margin l, r auto로. 즉 중간 정렬
   // h-full : 높이 100% (부모와 높이 똑같이)
+  // gap-[10px] 이렇게 px 사이즈 정해서 사용할 수 있음
   return (
     <div className="bg-red-100 min-h-screen">
       <header className="bg-blue-100 h-12 md:h-20">
         <div className="max-w-screen-xl mx-auto h-full flex justify-between items-center">
           <div>jiseon's portfolio</div>
           <ul className="flex gap-2 md:gap-8 text-xs md:text-base">
-            <li className="bg-indigo-300 px-2 py-1 rounded-md text-gray-100 cursor-pointer">
-              Introduce
-            </li>
-            <li className="bg-purple-300 px-2 py-1 rounded-md text-gray-100 cursor-pointer">
-              Portfolio
-            </li>
-            <li className="bg-blue-300 px-2 py-1 rounded-md text-gray-100 cursor-pointer">
-              Contact Me
-            </li>
+            <li className="bg-indigo-300 btn-style">Introduce</li>
+            <li className="bg-purple-300 btn-style">Portfolio</li>
+            <li className="bg-blue-300 btn-style">Contact Me</li>
           </ul>
         </div>
       </header>
