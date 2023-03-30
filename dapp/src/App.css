@@ -1,0 +1,27 @@
+/* body는 index.html에 있음. 직접 건드릴 일은 없음.  */
+.body {
+  margin: 0;
+}
+
+.hello {
+  display: inline-block;
+  background-color: lightblue;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.name {
+  background-color: lightgray;
+  display: inline-block;
+  padding: 12px;
+  border-radius: 12px;
+  margin-left: 12px;
+}
+
+.favorite {
+  background-color: lightcoral;
+  display: inline-block;
+  padding: 12px;
+  border-radius: 12px;
+  margin-left: 12px;
+}
