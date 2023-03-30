@@ -1,3 +1,5 @@
+import SunriseLogo from "./images/sunrise.jpeg";
+
 function App() {
   // extension Tailwind CSS IntelliSense 설치하고 해당 코드 부분에 마우스 올리면 어떤 코드인지 나옴
   // bg-red-100 : 배경색 빨간색으로,
@@ -11,7 +13,10 @@ function App() {
     <div className="bg-red-100 min-h-screen">
       <header className="bg-blue-100 h-12 md:h-20">
         <div className="max-w-screen-xl mx-auto h-full flex justify-between items-center">
-          <div>jiseon's portfolio</div>
+          {/* <div>jiseon's portfolio</div> */}
+          <div>
+            <img className="w-12" src={SunriseLogo} alt="SunriseLogo"></img>
+          </div>
           <ul className="flex gap-2 md:gap-8 text-xs md:text-base">
             <li className="bg-indigo-300 btn-style">Introduce</li>
             <li className="bg-purple-300 btn-style">Portfolio</li>
