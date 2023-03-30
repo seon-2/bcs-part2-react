@@ -1,27 +1,32 @@
-/* body는 index.html에 있음. 직접 건드릴 일은 없음.  */
+/* css 미리 만들어놓기  */
 .body {
   margin: 0;
 }
 
-.hello {
+.p-12 {
+  padding: 12px;
+}
+
+.br-12 {
+  border-radius: 12px;
+}
+
+.inline-block {
   display: inline-block;
+}
+
+.m-l-12 {
+  margin-left: 12px;
+}
+
+.bg-c-lightblue {
   background-color: lightblue;
-  padding: 12px;
-  border-radius: 12px;
 }
 
-.name {
+.bg-c-lightgray {
   background-color: lightgray;
-  display: inline-block;
-  padding: 12px;
-  border-radius: 12px;
-  margin-left: 12px;
 }
 
-.favorite {
+.bg-c-lightcoral {
   background-color: lightcoral;
-  display: inline-block;
-  padding: 12px;
-  border-radius: 12px;
-  margin-left: 12px;
 }
