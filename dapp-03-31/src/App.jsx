@@ -7,6 +7,16 @@ function App() {
     setCount(count + 1);
   };
 
+  const onClickSubtract = () => {
+    // 이전 값을 가져와서 사용
+    /* 여러 줄 주석
+    setCount((prev) => {
+      return prev - 1;
+    });
+    */
+    setCount(count - 1);
+  };
+
   return (
     <div className="bg-red-100 min-h-screen flex flex-col justify-center items-center">
       {/* html 영역에서 js 변수 사용하려면 {} 사용! */}
@@ -16,6 +26,9 @@ function App() {
         onClick={onClickAdd}
       >
         +
+      </button>
+      <button className="" onClick={onClickSubtract}>
+        -
       </button>
     </div>
   );
