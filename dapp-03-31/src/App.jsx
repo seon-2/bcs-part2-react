@@ -14,15 +14,7 @@ function App() {
   };
 
   const onClickAdd = () => {
-    /*
-    console.log(typeof num1);
-    console.log(typeof num2);
-
-    console.log(1 + 2);
-    console.log("1" + "2");
-    console.log("1" + 2);
-    */
-    setResult(num1 + num2);
+    setResult(parseInt(num1) + parseInt(num2));
   };
 
   return (
