@@ -4,6 +4,11 @@ function App() {
   const [num1, setNum1] = useState("문제점"); // 초기값을 설정하면 화면에서 값 수정 안됨
   const [result, setResult] = useState(0);
 
+  const onChangeNum1 = (e) => {
+    console.log(e);
+    console.log(e.target.value);
+  };
+
   return (
     <div className="bg-red-100 min-h-screen flex flex-col justify-center items-center">
       <h1 className="text-2xl font-bold mb-4">계산기</h1>
@@ -13,6 +18,7 @@ function App() {
           className="border-2 focus:outline-none focus:border-purple-400 rounded-lg px-4 py-2 text-xl ml-4"
           type="text"
           value={num1}
+          onChange={onChangeNum1}
         />
         <input
           className="border-2 focus:outline-none focus:border-purple-400 rounded-lg px-4 py-2 text-xl ml-4"
