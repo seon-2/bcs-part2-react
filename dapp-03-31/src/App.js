@@ -3,10 +3,12 @@ function App() {
 
   noUseState = 1;
 
-  const onClickAdd = (num) => (e) => {
-    // 차수 늘려서
-    console.log(e);
-    console.log(num);
+  const onClickAdd = () => {
+    // 똑같이 변수에 1씩 더하는 코드
+    // noUseState = noUseState + 1;
+    // noUseState += 1;
+    noUseState++;
+    // 버튼 눌러도 화면에서 숫자 증가 안함
   };
 
   return (
@@ -14,7 +16,7 @@ function App() {
       <div>{noUseState}</div>
       <button
         className="bg-green-300 w-12 h-12 rounded-md"
-        onClick={onClickAdd(2)}
+        onClick={onClickAdd}
       >
         +
       </button>
