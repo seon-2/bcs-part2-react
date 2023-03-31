@@ -1,9 +1,11 @@
 import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(0);
 
-  const onClickAdd = () => {};
+  const onClickAdd = () => {
+    setCount(count + 1);
+  };
 
   return (
     <div className="bg-red-100 min-h-screen flex flex-col justify-center items-center">
