@@ -3,8 +3,9 @@ function App() {
 
   noUseState = 1;
 
-  const onClickAdd = () => {
-    console.log("clicked!");
+  const onClickAdd = (e) => {
+    // 이벤트가 input으로 들어감
+    console.log(e);
   };
 
   return (
