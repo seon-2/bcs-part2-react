@@ -14,6 +14,12 @@ function App() {
       return prev - 1;
     });
     */
+
+    if (count <= 0) {
+      alert("count의 값이 0보다 작을 수 없습니다!");
+      return;
+    }
+
     setCount(count - 1);
   };
 
