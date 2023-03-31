@@ -27,7 +27,10 @@ function App() {
       >
         +
       </button>
-      <button className="" onClick={onClickSubtract}>
+      <button
+        className="bg-red-300 w-12 h-12 rounded-md mt-4"
+        onClick={onClickSubtract}
+      >
         -
       </button>
     </div>
