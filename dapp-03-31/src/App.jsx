@@ -14,6 +14,12 @@ function App() {
   };
 
   const onClickAdd = () => {
+    // 빈 입력값 예외 처리
+    if (num1 === "" || num2 === "") {
+      alert("값을 입력해주세요!");
+      return;
+    }
+
     // 숫자가 아닌 입력이 들어왔을 때 예외 처리
     if (isNaN(num1) || isNaN(num2)) {
       alert("숫자를 입력해주세요!");
