@@ -3,9 +3,10 @@ function App() {
 
   noUseState = 1;
 
-  const onClickAdd = (e) => {
-    // 이벤트가 input으로 들어감
+  const onClickAdd = (num) => (e) => {
+    // 차수 늘려서
     console.log(e);
+    console.log(num);
   };
 
   return (
@@ -13,7 +14,7 @@ function App() {
       <div>{noUseState}</div>
       <button
         className="bg-green-300 w-12 h-12 rounded-md"
-        onClick={onClickAdd}
+        onClick={onClickAdd(2)}
       >
         +
       </button>
