@@ -14,7 +14,13 @@ function App() {
   };
 
   const onClickAdd = () => {
-    setResult(num1 + num2);
+    // 숫자가 아닌 입력이 들어왔을 때 예외 처리
+    if (isNaN(num1) || isNaN(num2)) {
+      alert("숫자를 입력해주세요!");
+      return;
+    }
+
+    setResult(parseInt(num1) + parseInt(num2));
   };
 
   return (
@@ -24,9 +30,7 @@ function App() {
       <div className="mb-4 ">
         <input
           className="border-2 focus:outline-none focus:border-purple-400 rounded-lg px-4 py-2 text-xl ml-4"
-          // type을 number로 바꾸면 숫자만 입력되게 할 수 있음. 
-          // 하지만 onClickAdd 함수에서 결과를 숫자로 바꿔주지 않으면 문자열이 더해지게 됨
-          type="number"
+          type="text"
           value={num1}
           onChange={onChangeNum1}
         />
