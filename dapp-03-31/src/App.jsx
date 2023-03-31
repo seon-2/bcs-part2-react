@@ -1,14 +1,12 @@
 import Header from "./components/Header";
+import Introduce from "./components/Introduce";
 
 function App() {
   return (
     <div className="bg-red-100 min-h-screen">
       <Header />
       <main>
-        {/* Introduce */}
-        <div className="bg-green-100 max-w-screen-xl mx-auto h-96 flex">
-          내 소개
-        </div>
+        <Introduce />
         {/* 포트폴리오 카드 */}
         {/* 그리드 줄에 2개씩 / 여백은 gap, p(padding) / sm-lg, 1-4까지 크기에 따라 반응형 줄 수 있음*/}
         <ul className="bg-indigo-100 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 mg:grid-cols-3 lg:grid-cols-4 justify-items-center gap-8 py-8">
