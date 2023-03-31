@@ -14,7 +14,11 @@ function App() {
   };
 
   const onClickAdd = () => {
-    setResult(parseInt(num1) + parseInt(num2));
+    /*
+    console.log(Number(3.14)); // 소수점 포함
+    console.log(parseInt(3.14)); // 정수로
+    */
+    setResult(Number(num1) + parseInt(num2));
   };
 
   return (
