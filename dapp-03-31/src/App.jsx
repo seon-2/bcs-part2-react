@@ -13,6 +13,18 @@ function App() {
     setNum2(e.target.value);
   };
 
+  const onClickAdd = () => {
+    /*
+    console.log(typeof num1);
+    console.log(typeof num2);
+
+    console.log(1 + 2);
+    console.log("1" + "2");
+    console.log("1" + 2);
+    */
+    setResult(num1 + num2);
+  };
+
   return (
     <div className="bg-red-100 min-h-screen flex flex-col justify-center items-center">
       <h1 className="text-2xl font-bold mb-4">계산기</h1>
@@ -32,7 +44,10 @@ function App() {
         />
       </div>
       <div>
-        <button className="border-2 px-2 py-1 rounded-lg border-red-500 text-red-500">
+        <button
+          className="border-2 px-2 py-1 rounded-lg border-red-500 text-red-500"
+          onClick={onClickAdd}
+        >
           +
         </button>
         <button className="border-2 px-2 py-1 rounded-lg border-blue-500 text-blue-500 ml-4">
