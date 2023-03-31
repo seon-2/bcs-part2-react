@@ -14,11 +14,7 @@ function App() {
   };
 
   const onClickAdd = () => {
-    /*
-    console.log(Number(3.14)); // 소수점 포함
-    console.log(parseInt(3.14)); // 정수로
-    */
-    setResult(Number(num1) + parseInt(num2));
+    setResult(num1 + num2);
   };
 
   return (
@@ -28,7 +24,9 @@ function App() {
       <div className="mb-4 ">
         <input
           className="border-2 focus:outline-none focus:border-purple-400 rounded-lg px-4 py-2 text-xl ml-4"
-          type="text"
+          // type을 number로 바꾸면 숫자만 입력되게 할 수 있음. 
+          // 하지만 onClickAdd 함수에서 결과를 숫자로 바꿔주지 않으면 문자열이 더해지게 됨
+          type="number"
           value={num1}
           onChange={onChangeNum1}
         />
