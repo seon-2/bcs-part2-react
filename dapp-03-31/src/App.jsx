@@ -29,6 +29,54 @@ function App() {
     setResult(parseInt(num1) + parseInt(num2));
   };
 
+  const onClickSub = () => {
+    // 빈 입력값 예외 처리
+    if (num1 === "" || num2 === "") {
+      alert("값을 입력해주세요!");
+      return;
+    }
+
+    // 숫자가 아닌 입력이 들어왔을 때 예외 처리
+    if (isNaN(num1) || isNaN(num2)) {
+      alert("숫자를 입력해주세요!");
+      return;
+    }
+
+    setResult(parseInt(num1) - parseInt(num2));
+  };
+
+  const onClickMul = () => {
+    // 빈 입력값 예외 처리
+    if (num1 === "" || num2 === "") {
+      alert("값을 입력해주세요!");
+      return;
+    }
+
+    // 숫자가 아닌 입력이 들어왔을 때 예외 처리
+    if (isNaN(num1) || isNaN(num2)) {
+      alert("숫자를 입력해주세요!");
+      return;
+    }
+
+    setResult(parseInt(num1) * parseInt(num2));
+  };
+
+  const onClickDiv = () => {
+    // 빈 입력값 예외 처리
+    if (num1 === "" || num2 === "") {
+      alert("값을 입력해주세요!");
+      return;
+    }
+
+    // 숫자가 아닌 입력이 들어왔을 때 예외 처리
+    if (isNaN(num1) || isNaN(num2)) {
+      alert("숫자를 입력해주세요!");
+      return;
+    }
+
+    setResult(parseInt(parseInt(num1) / parseInt(num2)));
+  };
+
   return (
     <div className="bg-red-100 min-h-screen flex flex-col justify-center items-center">
       <h1 className="text-2xl font-bold mb-4">계산기</h1>
@@ -54,13 +102,22 @@ function App() {
         >
           +
         </button>
-        <button className="border-2 px-2 py-1 rounded-lg border-blue-500 text-blue-500 ml-4">
+        <button
+          className="border-2 px-2 py-1 rounded-lg border-blue-500 text-blue-500 ml-4"
+          onClick={onClickSub}
+        >
           -
         </button>
-        <button className="border-2 px-2 py-1 rounded-lg border-yellow-500 text-yellow-500 ml-4">
+        <button
+          className="border-2 px-2 py-1 rounded-lg border-yellow-500 text-yellow-500 ml-4"
+          onClick={onClickMul}
+        >
           *
         </button>
-        <button className="border-2 px-2 py-1 rounded-lg border-green-500 text-green-500 ml-4">
+        <button
+          className="border-2 px-2 py-1 rounded-lg border-green-500 text-green-500 ml-4"
+          onClick={onClickDiv}
+        >
           /
         </button>
       </div>
