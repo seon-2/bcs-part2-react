@@ -1,12 +1,16 @@
 import { useState } from "react";
 
 function App() {
-  const [num1, setNum1] = useState("문제점"); // 초기값을 설정하면 화면에서 값 수정 안됨
+  const [num1, setNum1] = useState(); // 초기값을 설정하면 화면에서 값 수정 안됨
+  const [num2, setNum2] = useState();
   const [result, setResult] = useState(0);
 
   const onChangeNum1 = (e) => {
-    console.log(e);
-    console.log(e.target.value);
+    setNum1(e.target.value);
+  };
+
+  const onChangeNum2 = (e) => {
+    setNum2(e.target.value);
   };
 
   return (
@@ -23,6 +27,8 @@ function App() {
         <input
           className="border-2 focus:outline-none focus:border-purple-400 rounded-lg px-4 py-2 text-xl ml-4"
           type="text"
+          value={num2}
+          onChange={onChangeNum2}
         />
       </div>
       <div>
