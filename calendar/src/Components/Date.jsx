@@ -16,9 +16,10 @@ function Date(props) {
       >
         {props.date}
       </div>
-      <ul className="p-2 text-lg h-20 ">
+      {/* truncate : 내용 길어지면 ... 으로 보여지게 */}
+      <ul className="p-2 text-lg min-h-[80px]">
         {props.todos.map((v, i) => {
-          return <li>{v}</li>;
+          return <li className="truncate">{v}</li>;
         })}
       </ul>
     </li>
