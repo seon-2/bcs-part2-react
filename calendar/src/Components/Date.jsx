@@ -16,7 +16,7 @@ function Date(props) {
       >
         {props.date}
       </div>
-      <ul className="p-2 text-lg">
+      <ul className="p-2 text-lg h-20 ">
         {props.todos.map((v, i) => {
           return <li>{v}</li>;
         })}
