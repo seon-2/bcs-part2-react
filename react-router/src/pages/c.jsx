@@ -2,7 +2,7 @@
 // 사람마다 다를 수 있음! (컨벤션)
 
 function C() {
-  return <div className="flex justify-center items-center">C 페이지</div>;
+  return <div className="flex grow justify-center items-center">C 페이지</div>;
 }
 
 export default C;
