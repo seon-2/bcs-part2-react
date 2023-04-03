@@ -10,7 +10,7 @@ function Calendar() {
         // index와 value 콘솔에 출력해보기 (콘솔에 2번 찍히지만, 이거는 나중에)
         // -> Warning: Each child in a list should have a unique "key" prop. 에러 확인!
         console.log(`index : ${i + 1}, value : ${v}`);
-        return <Date />;
+        return <Date key={i} />; // key prop 추가해서 에러 해결!
       })}
     </div>
   );
