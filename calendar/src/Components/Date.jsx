@@ -7,7 +7,11 @@ function Date(props) {
       {/* 삼항연산자 [조건] ? 참이면 실행될 코드 : 거짓이면 실행될 코드*/}
       <div
         className={`${
-          props.day === "SUN" ? "bg-red-400" : "bg-blue-400"
+          props.day === "SUN"
+            ? "bg-red-400"
+            : props.day === "SAT"
+            ? "bg-orange-400"
+            : "bg-blue-400"
         } rounded-t-lg px-2 py-1 text-xl text-white`}
       >
         {props.date}
