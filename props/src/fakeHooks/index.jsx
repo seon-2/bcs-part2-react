@@ -4,5 +4,8 @@ export const fakeUseState = () => {
   // 실제로는 useState를 구성하는 수식이 있음
   let value;
   const setValue = () => {};
-  return [value, setValue];
+  
+  // 만약 객체를 return 한다면?
+  //   return { value: value, setValue: setValue };
+  return { value, setValue };
 };
