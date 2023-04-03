@@ -1,9 +1,9 @@
-import CardA from "./components/CardA";
+import Card from "./components/Card";
 
 function App() {
   return (
     <div className="min-h-screen p-12 grid grid-cols-3">
-      <CardA />
+      <Card />
     </div>
   );
 }
