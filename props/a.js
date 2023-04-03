@@ -1,12 +1,13 @@
 // 구조분해 실습 a.js
 
-// 배열 하나 만들기
-const fruits = ["Apple", "Banana", "Cherry"];
+// 객체 하나 만들기
+const myProfile = {
+  name: "jiseon",
+  age: 999,
+  job: "student",
+  isGenius: true,
+};
 
-let a, b, c;
-
-[a, b, c] = fruits;
-
-console.log(a);
-console.log(b);
-console.log(c);
+console.log(myProfile);
+// 이름만 출력하려면
+console.log(myProfile.name);
