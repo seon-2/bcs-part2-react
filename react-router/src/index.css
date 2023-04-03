@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .pageFrame {
+    @apply flex grow justify-center items-center;
+  }
+}

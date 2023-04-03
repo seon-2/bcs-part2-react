@@ -2,7 +2,7 @@
 // 사람마다 다를 수 있음! (컨벤션)
 
 function B() {
-  return <div className="flex grow justify-center items-center">B 페이지</div>;
+  return <div className="pageFrame">B 페이지</div>;
 }
 
 export default B;

@@ -2,9 +2,7 @@
 // 사람마다 다를 수 있음! (컨벤션)
 
 function NotFound() {
-  return (
-    <div className="flex grow justify-center items-center">NotFound 페이지</div>
-  );
+  return <div className="pageFrame">NotFound 페이지</div>;
 }
 
 export default NotFound;

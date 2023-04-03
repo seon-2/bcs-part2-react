@@ -4,7 +4,7 @@
 function Main() {
   return (
     // 헤더, 푸터 높이값 보존한 상태에서 나머지 늘어가는 것을 보장<-> shrink
-    <div className="flex grow justify-center items-center">Main 페이지</div>
+    <div className="pageFrame">Main 페이지</div>
   );
 }
 
