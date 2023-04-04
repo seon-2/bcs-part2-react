@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function PortfolioCard({ title, desc, image, index }) {
   // Portfolio에서 props로 값 내려받아 적용
@@ -31,14 +32,17 @@ function PortfolioCard({ title, desc, image, index }) {
       </div>
       <div className="text-xl font-bold mt-2 mx-2">{title}</div>
       <div className="mt-2 mx-2">{desc}</div>
-      <button
-        className={`absolute bottom-0 right-0 m-4 px-4 py-2 rounded-full ${
-          colors[index % colors.length]
-        }`}
-      >
-        {/* index를 배열의 길이로 나누어 나머지 값으로 색상 할당 */}
-        View
-      </button>
+      {/* 포트폴리오 상세페이지로 이동. 그런데, 모든 버튼이 같은 페이지로 연결됨. (해당하는 각 프로젝트를 보여줘야 함) */}
+      <Link to="/portfolio">
+        <button
+          className={`absolute bottom-0 right-0 m-4 px-4 py-2 rounded-full ${
+            colors[index % colors.length]
+          }`}
+        >
+          {/* index를 배열의 길이로 나누어 나머지 값으로 색상 할당 */}
+          View
+        </button>
+      </Link>
     </li>
   );
 }
