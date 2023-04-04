@@ -8,7 +8,7 @@ import PortfolioDetail from "./pages/portfolioDetail";
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg-red-100 min-h-screen">
+      <div className="bg-red-100 min-h-screen flex flex-col">
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
