@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Counter = () => {
   const [count, setCount] = useState(0);
@@ -6,6 +6,10 @@ const Counter = () => {
   const onClickAdd = () => {
     setCount(count + 1);
   };
+
+  useEffect(() => {
+    console.log("Counter 컴포넌트가 생성된 상태입니다.");
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center">
