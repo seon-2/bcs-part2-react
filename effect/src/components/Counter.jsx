@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
-
+const Counter = ({ count, setCount }) => {
   const onClickAdd = () => {
     setCount(count + 1);
   };
@@ -20,7 +18,7 @@ const Counter = () => {
     };
 
     // 추적하고 싶은 값(count) : deps(dependencies; 의존성 배열)
-    // Counter의 값이 업데이트 될 때마다 count의 값이 변하면서 
+    // Counter의 값이 업데이트 될 때마다 count의 값이 변하면서
     // 콘솔에 제거, 생성, 업데이트 출력
   }, [count]);
 
