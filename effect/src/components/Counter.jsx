@@ -9,7 +9,13 @@ const Counter = () => {
 
   useEffect(() => {
     console.log("Counter 컴포넌트가 생성된 상태입니다.");
-  }, []);
+
+    if (count > 0) {
+      console.log("Counter 업데이트 되었습니다.");
+    }
+    // 추적하고 싶은 값(count) : deps(dependencies; 의존성 배열)
+    // Counter의 값이 업데이트 될 때마다 count의 값이 변하면서 콘솔에 생성, 업데이트 출력
+  }, [count]);
 
   return (
     <div className="flex flex-col justify-center items-center">
