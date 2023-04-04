@@ -8,6 +8,7 @@ function Portfolio() {
         return (
           <PortfolioCard
             key={i}
+            index={i}
             title={v.title}
             image={v.image}
             desc={v.desc}
