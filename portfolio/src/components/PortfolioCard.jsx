@@ -34,8 +34,12 @@ function PortfolioCard({ title, desc, image, index }) {
       <div className="mt-2 mx-2">{desc}</div>
       {/* 포트폴리오 상세페이지로 이동. 그런데, 모든 버튼이 같은 페이지로 연결됨. (해당하는 각 프로젝트를 보여줘야 함) */}
       {/* index 사용해서 해당하는 각 프로젝트로 다이나믹 라우팅 */}
-      {/* url에 정보를 담아서 상세페이지로 보내기. name이라는 key로 h662라는 값을, age라는 key로 18이라는 값을 보냄 */}
-      <Link to={`/portfolio/${index + 1}?name=h662&age=18`}>
+      {/* url에 정보를 담아서 상세페이지로 보내기. title, desc, image 보내기 */}
+      <Link
+        to={`/portfolio/${
+          index + 1
+        }?title=${title}&desc=${desc}&image=${image}`}
+      >
         <button
           className={`absolute bottom-0 right-0 m-4 px-4 py-2 rounded-full ${
             colors[index % colors.length]
