@@ -13,8 +13,15 @@ const Counter = () => {
     if (count > 0) {
       console.log("Counter 업데이트 되었습니다.");
     }
+
+    // 컴포넌트 교체될 때 (return () 안에 : clean up 함수)
+    return () => {
+      console.log("Counter 제거");
+    };
+
     // 추적하고 싶은 값(count) : deps(dependencies; 의존성 배열)
-    // Counter의 값이 업데이트 될 때마다 count의 값이 변하면서 콘솔에 생성, 업데이트 출력
+    // Counter의 값이 업데이트 될 때마다 count의 값이 변하면서 
+    // 콘솔에 제거, 생성, 업데이트 출력
   }, [count]);
 
   return (
