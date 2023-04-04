@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./pages/main";
+import NotFound from "./pages/notFound";
 import PortfolioDetail from "./pages/portfolioDetail";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/portfolio/:projectId" element={<PortfolioDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </div>
