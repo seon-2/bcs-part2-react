@@ -33,7 +33,8 @@ function PortfolioCard({ title, desc, image, index }) {
       <div className="text-xl font-bold mt-2 mx-2">{title}</div>
       <div className="mt-2 mx-2">{desc}</div>
       {/* 포트폴리오 상세페이지로 이동. 그런데, 모든 버튼이 같은 페이지로 연결됨. (해당하는 각 프로젝트를 보여줘야 함) */}
-      <Link to="/portfolio">
+      {/* index 사용해서 해당하는 각 프로젝트로 다이나믹 라우팅 */}
+      <Link to={`/portfolio/${index + 1}`}>
         <button
           className={`absolute bottom-0 right-0 m-4 px-4 py-2 rounded-full ${
             colors[index % colors.length]
