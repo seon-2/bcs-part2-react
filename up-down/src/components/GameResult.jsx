@@ -1,6 +1,6 @@
 const GameResult = () => {
-  const point = localStorage.getItem("point");
-  // 현재는 화면 처음 켤 때 현재점수에 아무것도 안 나타남 (0도)
+  const point = localStorage.getItem("point") | 0;
+  // 현재는 화면 처음 켤 때 현재점수에 아무것도 안 나타남 (0도) => 해결! 만약 없으면(null)이면 0으로 초기화
 
   // grow는 부모가 flex여야 함.
   return (
