@@ -10,6 +10,27 @@ const GameBoard = () => {
     setChoiceNum(e.target.value);
   };
 
+  // 랜덤 숫자와 사용자가 선택한 숫자 비교
+  const onClickCheck = () => {
+    let checkNum = parseInt(choiceNum);
+
+    // 예외 처리 - 문자입력
+    if (isNaN(checkNum)) {
+      setHint("숫자를 입력해주세요!");
+      return;
+    }
+
+    // 예외 처리 - 0~100 이외의 숫자
+    if (0 > checkNum || checkNum >= 100) {
+      setHint("숫자를 잘못 입력하셨습니다!");
+      return;
+    }
+
+    // 랜덤 숫자와 유저가 선택한 숫자 비교
+
+    // 숫자 비교
+  };
+
   // 랜덤 숫자를 추적
   useEffect(() => {
     console.log(`랜덤 숫자는 ${randomNum}입니다.`);
@@ -32,7 +53,10 @@ const GameBoard = () => {
           value={choiceNum}
           onChange={onChangeChoice}
         />
-        <button className="px-4 py-2 ml-2 rounded-lg border-2 border-pink-300 text-pink-300 shadow-lg">
+        <button
+          onClick={onClickCheck}
+          className="px-4 py-2 ml-2 rounded-lg border-2 border-pink-300 text-pink-300 shadow-lg"
+        >
           확인
         </button>
       </div>
