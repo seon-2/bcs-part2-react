@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import Child from "./components/Child";
 import ChildFriend from "./components/ChildFriend";
 
-const AppContext = createContext();
+export const AppContext = createContext();
 
 function App() {
   const [gift, setGift] = useState(10000000);
