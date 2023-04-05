@@ -1,7 +1,10 @@
-const UltraSuperGrandChild = ({ gift }) => {
+const UltraSuperGrandChild = ({ gift, setGift }) => {
   return (
     <div>
-      <div className="w-40 h-40 bg-yellow-300">UltraSuperGrandChild : {gift}</div>
+      <div className="w-40 h-40 bg-yellow-300">
+        UltraSuperGrandChild : {gift}
+      </div>
+      <button onClick={() => setGift(gift + 1)}>증가</button>
     </div>
   );
 };
