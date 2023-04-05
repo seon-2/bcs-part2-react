@@ -11,7 +11,9 @@ const GameBoard = () => {
   };
 
   // 랜덤 숫자와 사용자가 선택한 숫자 비교
-  const onClickCheck = () => {
+  const onClickCheck = (e) => {
+    e.preventDefault();
+
     let checkNum = parseInt(choiceNum);
 
     // 예외 처리 - 문자입력
@@ -54,18 +56,25 @@ const GameBoard = () => {
     <div className=" w-full grow flex flex-col justify-center items-center">
       <div className="mb-4 text-xl font-bold">{hint}</div>
       <div>
-        <input
-          className="border-2 rounded-lg px-4 py-2 focus:outline-pink-300 shadow-lg"
-          type="text"
-          value={choiceNum}
-          onChange={onChangeChoice}
-        />
-        <button
+        <form onSubmit={onClickCheck}>
+          <input
+            className="border-2 rounded-lg px-4 py-2 focus:outline-pink-300 shadow-lg"
+            type="text"
+            value={choiceNum}
+            onChange={onChangeChoice}
+          />
+          {/* <button
           onClick={onClickCheck}
           className="px-4 py-2 ml-2 rounded-lg border-2 border-pink-300 text-pink-300 shadow-lg"
         >
           확인
-        </button>
+        </button> */}
+          <input
+            className="px-4 py-2 ml-2 rounded-lg border-2 border-pink-300 text-pink-300 shadow-lg"
+            type="submit"
+            value="확인"
+          />
+        </form>
       </div>
     </div>
   );
