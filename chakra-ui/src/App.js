@@ -5,7 +5,8 @@ function App() {
   return (
     <ChakraProvider>
       <Box color="red.400">Hello, chakra-ui!</Box>
-      <Button colorScheme="cyan" leftIcon={<PhoneIcon />}>
+      {/* variant : 변형 스타일*/}
+      <Button colorScheme="cyan" leftIcon={<PhoneIcon />} variant="outline">
         버 튼
       </Button>
     </ChakraProvider>
