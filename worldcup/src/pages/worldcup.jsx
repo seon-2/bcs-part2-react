@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import animalData from "../animalData.json";
+import AnimalCard from "../components/AnimalCard";
 
 const Worldcup = () => {
   const [shuffleAnimal, setShuffleAnimal] = useState();
@@ -17,7 +18,7 @@ const Worldcup = () => {
   useEffect(() => console.log(animalData), []);
   return (
     <div className="bg-pink-200 min-h-screen flex justify-center items-center">
-      Worldcup
+      <AnimalCard />
     </div>
   );
 };
