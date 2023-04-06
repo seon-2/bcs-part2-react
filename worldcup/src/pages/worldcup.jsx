@@ -13,12 +13,12 @@ const Worldcup = () => {
       return Math.random() - 0.5;
     });
 
-    console.log(shuffleAnimalData);
+    setShuffleAnimal(shuffleAnimalData);
   }, []);
   useEffect(() => console.log(animalData), []);
   return (
     <div className="bg-pink-200 min-h-screen flex justify-center items-center">
-      <AnimalCard />
+      <AnimalCard animal={shuffleAnimal[0]} />
     </div>
   );
 };
