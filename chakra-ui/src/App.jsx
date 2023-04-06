@@ -1,60 +1,39 @@
 import {
   ChakraProvider,
-  Box,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuGroup,
-  MenuDivider
+  useDisclosure,
+  Flex,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
-import { PhoneIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import { useState } from "react";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <ChakraProvider>
-      <Box color="red.400">Hello, chakra-ui!</Box>
-      {/* variant : 변형 스타일*/}
-      <Button
-        isLoading={isLoading}
-        colorScheme="cyan"
-        leftIcon={<PhoneIcon />}
-        variant="outline"
-      >
-        버 튼
-      </Button>
-      <Menu>
-        <MenuButton
-          colorScheme="teal"
-          as={Button}
-          rightIcon={<ChevronDownIcon />}
-        >
-          저녁 메뉴
-        </MenuButton>
-        <MenuList>
-          <MenuGroup title="파스타">
-            <MenuItem>알리오올리오</MenuItem>
-            <MenuItem>크림파스타</MenuItem>
-            <MenuItem>토마토파스타</MenuItem>
-          </MenuGroup>
-          <MenuDivider />
-          <MenuGroup title="치킨">
-            <MenuItem>양념치킨</MenuItem>
-            <MenuItem>후라이드</MenuItem>
-            <MenuItem>구운치킨</MenuItem>
-          </MenuGroup>
-          <MenuDivider />
-          <MenuGroup title="피자">
-            <MenuItem>파인애플피자</MenuItem>
-            <MenuItem>페퍼로니피자</MenuItem>
-            <MenuItem>치즈피자</MenuItem>
-          </MenuGroup>
-        </MenuList>
-      </Menu>
+      <Flex minH="100vh" justifyContent="center" alignItems="center">
+        <Button onClick={onOpen}>Open</Button>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>What's up!</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={20}>안녕하세요!</ModalBody>
+            <ModalFooter>
+              <Button mr={4} onClick={onClose}>
+                닫기
+              </Button>
+              Designed by, seon
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Flex>
     </ChakraProvider>
   );
 }
