@@ -5,6 +5,12 @@ import AnimalCard from "../components/AnimalCard";
 
 const Worldcup = () => {
   const [shuffleAnimal, setShuffleAnimal] = useState();
+  const [choice, setChoice] = useState(0);
+  // 선택 함수
+  const onClickChoice = () => {
+    // 다음 동물 2마리 띄워주기
+    setChoice(choice + 2);
+  };
 
   useEffect(() => {
     let shuffleAnimalData = animalData.sort(() => {
@@ -24,9 +30,17 @@ const Worldcup = () => {
       useEffect는 사이드에서 결과값만 넘겨줌 */}
       {shuffleAnimal && (
         <>
-          <AnimalCard animal={shuffleAnimal[0]} />
+          <AnimalCard
+            animal={shuffleAnimal[choice]}
+            choice={choice}
+            onClickChoice={onClickChoice}
+          />
           <div className="text-2xl mx-8 font-bold">VS</div>
-          <AnimalCard animal={shuffleAnimal[1]} />
+          <AnimalCard
+            animal={shuffleAnimal[choice + 1]}
+            choice={choice + 1}
+            onClickChoice={onClickChoice}
+          />
         </>
       )}
     </div>

@@ -1,4 +1,4 @@
-const AnimalCard = ({ animal }) => {
+const AnimalCard = ({ animal, choice, onClickChoice }) => {
   return (
     <div className="flex flex-col justify-normal items-center">
       <img
@@ -7,7 +7,15 @@ const AnimalCard = ({ animal }) => {
         alt="동물"
       />
       <div className="text-2xl mt-4 font-bold">{animal} 💕💕💕</div>
-      <button className="text-2xl mt-4 px-4 py-2 rounded-md">선택</button>
+      <button
+        className={`text-2xl mt-4 px-4 py-2 rounded-md ${
+          // 2로 나눴을 때 나머지가 0이면 짝수, 아니면(1이면) 홀수
+          choice % 2 === 0 ? "bg-pink-400" : "bg-violet-400"
+        }`}
+        onClick={onClickChoice}
+      >
+        선택
+      </button>
     </div>
   );
 };
