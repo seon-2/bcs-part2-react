@@ -12,7 +12,8 @@ const AnimalCard = ({ animal, choice, onClickChoice }) => {
           // 2로 나눴을 때 나머지가 0이면 짝수, 아니면(1이면) 홀수
           choice % 2 === 0 ? "bg-pink-400" : "bg-violet-400"
         }`}
-        onClick={onClickChoice}
+        // onClickChoice 함수에 선택한 동물 이름을 전달해줌
+        onClick={onClickChoice(animal)}
       >
         선택
       </button>

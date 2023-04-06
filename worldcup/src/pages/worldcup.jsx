@@ -6,8 +6,13 @@ import AnimalCard from "../components/AnimalCard";
 const Worldcup = () => {
   const [shuffleAnimal, setShuffleAnimal] = useState();
   const [choice, setChoice] = useState(0);
+  const [nextRound, setNextRound] = useState([]);
+
   // 선택 함수
-  const onClickChoice = () => {
+  // 이차 함수 (v) => 화살표함수에 값 전달
+  const onClickChoice = (v) => () => {
+    // 배열 안에 추가. 기존 동물 + 새로 선택한 동물. push 대신 스프레드(얕은복사) 사용
+    setNextRound([...nextRound, v]);
     // 다음 동물 2마리 띄워주기
     setChoice(choice + 2);
   };
@@ -21,7 +26,7 @@ const Worldcup = () => {
 
     setShuffleAnimal(shuffleAnimalData);
   }, []);
-  useEffect(() => console.log(animalData), []);
+  useEffect(() => console.log(nextRound), [nextRound]);
   return (
     <div className="bg-pink-200 min-h-screen flex justify-center items-center">
       {/* 에러 발생 Cannot read properties of undefined (reading '7') */}
