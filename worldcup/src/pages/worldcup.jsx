@@ -22,7 +22,13 @@ const Worldcup = () => {
       {/* 사이드 이펙트 */}
       {/* 렌더링 되는 시점에서 useEffect는 아직 실행 안됨. 데이터가 없음. useState 기준으로 초기값 필요
       useEffect는 사이드에서 결과값만 넘겨줌 */}
-      {shuffleAnimal && <AnimalCard animal={shuffleAnimal[0]} />}
+      {shuffleAnimal && (
+        <>
+          <AnimalCard animal={shuffleAnimal[0]} />
+          <div className="text-2xl mx-8 font-bold">VS</div>
+          <AnimalCard animal={shuffleAnimal[1]} />
+        </>
+      )}
     </div>
   );
 };
