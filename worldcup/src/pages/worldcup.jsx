@@ -15,7 +15,11 @@ const Worldcup = () => {
     console.log(shuffleAnimalData);
   }, []);
   useEffect(() => console.log(animalData), []);
-  return <div>Worldcup</div>;
+  return (
+    <div className="bg-pink-200 min-h-screen flex justify-center items-center">
+      Worldcup
+    </div>
+  );
 };
 
 export default Worldcup;
