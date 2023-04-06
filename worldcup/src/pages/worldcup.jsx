@@ -7,6 +7,7 @@ const Worldcup = () => {
   const [shuffleAnimal, setShuffleAnimal] = useState();
   const [choice, setChoice] = useState(0);
   const [nextRound, setNextRound] = useState([]);
+  const [end, setEnd] = useState(16);
 
   // 선택 함수
   // 이차 함수 (v) => 화살표함수에 값 전달
@@ -27,6 +28,20 @@ const Worldcup = () => {
     setShuffleAnimal(shuffleAnimalData);
   }, []);
   useEffect(() => console.log(nextRound), [nextRound]);
+  useEffect(() => {
+    if (choice === end) {
+      console.log("한 라운드 종료");
+
+      // nextRound에 담긴 동물을 shuffleAnimal로 옮기기
+      setShuffleAnimal(nextRound);
+      // nextRound 배열 초기화
+      setNextRound([]);
+      // 16강 -> 8강
+      setEnd(end / 2);
+      // choice 0으로 만들기
+      setChoice(0);
+    }
+  }, [choice]);
   return (
     <div className="bg-pink-200 min-h-screen flex justify-center items-center">
       {/* 에러 발생 Cannot read properties of undefined (reading '7') */}
