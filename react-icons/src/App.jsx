@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   FaSun,
   FaCloudSun,
@@ -27,6 +28,32 @@ const weatherIcon = {
 };
 
 function App() {
+  // OpenWeather API에 넘겨줄 위도, 경도 useState로 변수 선언
+  const [lat, setLat] = useState();
+  const [lon, setLon] = useState();
+
+  // 브라우저를 통해서 위도, 경도값 가져옴
+  const getGeolocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLat(position.coords.latitude);
+        setLon(position.coords.longitude);
+      },
+      () => {
+        alert("위치 정보에 동의 해주셔야 합니다.");
+      }
+    );
+  };
+  // useEffect 안에 넣어서 시작할 때 한 번 위도 경도 받아옴
+  useEffect(() => {
+    getGeolocation();
+  }, []);
+
+  // lat이 바뀔 때 감지해서 console.log(lat) 출력
+  useEffect(() => console.log(lat), [lat]);
+  // lon이 바뀔 때 감지해서 console.log(lon) 출력
+  useEffect(() => console.log(lon), [lon]);
+
   return (
     <div className="bg-red-100 min-h-screen flex justify-center items-center"></div>
   );
