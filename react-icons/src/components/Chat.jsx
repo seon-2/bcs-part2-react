@@ -17,6 +17,12 @@ const Chat = () => {
         return;
       }
 
+      // 빈 입력창으로 검색 버튼 눌렀을 때
+      if (!question) {
+        alert("질문을 입력해주세요.");
+        return;
+      }
+
       // 로딩 중 true로 바꿈. 응답 받기 직전에(응답 동안에 로딩중 true), 응답 받고 나면 false
       setIsLoading(true);
 
