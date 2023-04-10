@@ -67,7 +67,7 @@ const Chat = () => {
   //   }, [question]);
 
   return (
-    <div className="bg-black min-h-screen flex justify-center items-center text-white">
+    <div className="bg-black min-h-screen flex flex-col justify-center items-center text-white">
       <form onSubmit={onSubmitChat}>
         <input
           type="text"
