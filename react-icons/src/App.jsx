@@ -32,6 +32,7 @@ function App() {
   // OpenWeather API에 넘겨줄 위도, 경도 useState로 변수 선언
   const [lat, setLat] = useState();
   const [lon, setLon] = useState();
+  const [weatherInfo, setWeatherInfo] = useState();
 
   // 브라우저를 통해서 위도, 경도값 가져옴
   const getGeolocation = () => {
@@ -50,9 +51,20 @@ function App() {
     try {
       // 환경변수 : api 키는 외부로 노출되면 안 됨. 따로 .env파일을 만들어서 변수를 설정해놓고 그 파일은 올리지 않고 api 키만 가져와서 사용
       // 서버 다시 시작 필요
-      await axios.get(
+
+      // axios로 받은 데이터를 response 변수에 담기
+      const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API}&units=metric`
       );
+
+      // 200번 에러가 오면 alert 처리
+      if (response.status !== 200) {
+        alert("날씨 정보를 가져오지 못했습니다.");
+        return;
+      }
+
+      console.log(response.data);
+      setWeatherInfo(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -61,6 +73,13 @@ function App() {
   useEffect(() => {
     getGeolocation();
   }, []);
+
+  // lat이나 lon이 없으면 빠져나감. 둘 다 있으면 getWeatherInfo() 실행
+  useEffect(() => {
+    if (!lat || !lon) return;
+
+    getWeatherInfo();
+  }, [lat, lon]);
 
   // lat이 바뀔 때 감지해서 console.log(lat) 출력
   useEffect(() => console.log(lat), [lat]);
