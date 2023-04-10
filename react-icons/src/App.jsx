@@ -99,6 +99,13 @@ function App() {
           {weatherIcon[weatherInfo.weather[0].icon.substring(0, 2)]}
           {/* 객체도 배열처럼 접근해서 출력 가능 */}
           {/* {weatherIcon["01"]} */}
+          {/* 도시 이름, 기온 출력 - 소수점 첫째 자리까지  */}
+          {/* toFixed() 메서드는 숫자를 고정 소수점 표기법(fixed-point notation)으로 표시 */}
+          <div className="mt-8 text-2xl">
+            {weatherInfo.name},{weatherInfo.main.temp.toFixed(1)}℃
+            {/* 문자로 바꾸고 인덱스 0부터 4전까지 출력 */}
+            {/* {weatherInfo.main.temp.toString().substring(0, 4)} ℃ */}
+          </div>
         </div>
       ) : (
         "날씨 정보를 로딩중입니다 ..."
