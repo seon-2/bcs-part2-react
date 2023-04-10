@@ -90,7 +90,20 @@ function App() {
   useEffect(() => console.log(process.env.REACT_APP_WEATHER_API), []);
 
   return (
-    <div className="bg-red-100 min-h-screen flex justify-center items-center"></div>
+    <div className="bg-red-100 min-h-screen flex justify-center items-center">
+      {/* 날씨 정보 보여주기 */}
+      {/* {weatherInfo ? "날씨 정보가 있음." : "날씨 정보를 로딩중입니다 ..."} */}
+      {/* substring은 문자열 자르는 함수.  */}
+      {weatherInfo ? (
+        <div className="flex flex-col justify-center items-center">
+          {weatherIcon[weatherInfo.weather[0].icon.substring(0, 2)]}
+          {/* 객체도 배열처럼 접근해서 출력 가능 */}
+          {/* {weatherIcon["01"]} */}
+        </div>
+      ) : (
+        "날씨 정보를 로딩중입니다 ..."
+      )}
+    </div>
   );
 }
 
