@@ -22,6 +22,12 @@ const Chat = () => {
           },
         }
       );
+      // 200번 에러가 오면 alert 처리
+      if (response.status !== 200) {
+        alert("오류가 발생했습니다.");
+        return;
+      }
+
       console.log(response); // 데이터 콘솔로 출력되는지 확인
       // response에서 원하는 부분만 content에 담기
       setContent(response.data.choices[0].message.content);
