@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const Chat = () => {
   const [question, setQuestion] = useState("");
+  const [content, setContent] = useState("");
 
   // form 태그의 onSubmit 안에 들어가서, 엔터로 검색 시 새로고침 막음.
   const onSubmitChat = async (e) => {
@@ -22,6 +23,8 @@ const Chat = () => {
         }
       );
       console.log(response); // 데이터 콘솔로 출력되는지 확인
+      // response에서 원하는 부분만 content에 담기
+      setContent(response.data.choices[0].message.content);
     } catch (error) {
       console.error(error);
     }
@@ -42,6 +45,8 @@ const Chat = () => {
         />
         <input type="submit" value="검 색" />
       </form>
+      {/* content 가 있으면 div 보여줌 */}
+      {content && <div className="mt-4 px-16">{content}</div>}
     </div>
   );
 };
