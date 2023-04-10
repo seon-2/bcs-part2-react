@@ -25,6 +25,8 @@ const Chat = () => {
 
       // 로딩 중 true로 바꿈. 응답 받기 직전에(응답 동안에 로딩중 true), 응답 받고 나면 false
       setIsLoading(true);
+      // setContent 초기화 : 기존 검색 지우기
+      setContent("");
 
       // axios.post 요청 : url, body, headers - auth 토큰 설정
       const response = await axios.post(
