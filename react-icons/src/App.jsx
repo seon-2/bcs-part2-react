@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   FaSun,
   FaCloudSun,
@@ -44,6 +45,18 @@ function App() {
       }
     );
   };
+
+  const getWeatherInfo = async () => {
+    try {
+      // 환경변수 : api 키는 외부로 노출되면 안 됨. 따로 .env파일을 만들어서 변수를 설정해놓고 그 파일은 올리지 않고 api 키만 가져와서 사용
+      // 서버 다시 시작 필요
+      await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API}&units=metric`
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
   // useEffect 안에 넣어서 시작할 때 한 번 위도 경도 받아옴
   useEffect(() => {
     getGeolocation();
@@ -53,6 +66,9 @@ function App() {
   useEffect(() => console.log(lat), [lat]);
   // lon이 바뀔 때 감지해서 console.log(lon) 출력
   useEffect(() => console.log(lon), [lon]);
+
+  // REACT_APP_WEATHER_API 확인
+  useEffect(() => console.log(process.env.REACT_APP_WEATHER_API), []);
 
   return (
     <div className="bg-red-100 min-h-screen flex justify-center items-center"></div>
