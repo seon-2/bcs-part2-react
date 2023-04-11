@@ -25,5 +25,10 @@ router.put("/:id", (req, res) => {
   res.send("트윗 수정");
 });
 
+// 게시물 삭제 - DELETE (특정 트윗 삭제)
+router.delete("/:id", (req, res) => {
+  res.send("트윗 삭제");
+});
+
 // exports 필요
 module.exports = router;
