@@ -15,5 +15,10 @@ router.get("/:id", (req, res) => {
   res.send("특정 트윗 조회");
 });
 
+// 게시물 생성 - CREATE
+router.post("/", (req, res) => {
+  res.send("트윗 생성");
+});
+
 // exports 필요
 module.exports = router;
