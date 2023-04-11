@@ -50,5 +50,20 @@ router.put("/done/:id", (req, res) => {
   res.json(todoData);
 });
 
+// todo 삭제 - DELETE (http://localhost:3010/todo/1)
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  todoData = todoData.filter((v, i) => {
+    // return 뒤의 조건이 참일 때만 결과값에 담김
+    // id가 1번이면 삭제해야 함
+    // i(인덱스)가 1번이 아닌 데이터만 담김(필터링)
+    return parseInt(id) !== i;
+    // 지금 예제는 삭제, 추가 시 배열의 길이가 바뀌게 되어서(인덱스도 따라서 바뀌게 되기 때문에) 좋지 않음. -> json에 id 값 포함하는 것이 좋음 
+  });
+  console.log(todoData);
+
+  res.json(todoData);
+});
 // exports 필요
 module.exports = router;
