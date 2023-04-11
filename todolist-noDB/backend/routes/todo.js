@@ -18,12 +18,20 @@ router.post("/", (req, res) => {
   // FE에서 할일(title)과 설명(desc) 요청 보내기
 
   //   console.log(req); // req 확인해보기. 많은 데이터(body, header ...등)가 req에 있음
-  console.log(req.body); // vscode의 터미널에서 확인 >> undefined
+  //   console.log(req.body); // vscode의 터미널에서 확인 >> undefined
   // postman에서 body-raw-json 간단한 json 넣어서 확인해도 >> undefined
   // app.js에 미들웨어 추가 후 POST 요청 보내면 확인 가능>> { title: '피자 먹기 🍕', desc: '맛있는 피자 🍕' }
 
-  // res.send() 없으면 서버 멈추기 때문에 임시로 작성
-  res.send("임시로 투두 생성.");
+  // 구조분해
+  const { title, desc } = req.body;
+  //   console.log(title, desc); // vscode의 터미널에서 확인 >> 피자 먹기 🍕 맛있는 피자 🍕
+  todoData.push({ title, desc, isDone: false }); // 실제로는 DB에 push 해야 함. 로컬에 있는 todoData.json 파일이 바뀌진 않음
+  //   todoData.push({ title: title, desc: desc }); // 같음!
+  console.log(todoData);
+
+  // res.send() 없으면 서버 멈추기 때문에 임시로 작성, push 한 todoData 확인 가능
+  // res는 하나의 라우터에 하나만 존재!
+  res.json(todoData);
 });
 
 // exports 필요
