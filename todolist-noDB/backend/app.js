@@ -1,11 +1,15 @@
 // import 와 같은 기능
 const express = require("express");
+const todoRouter = require("./routes/todo");
 
 // express를 사용
 const app = express();
 
 // 포트번호 설정
 const port = 3010;
+
+// /todo 경로에 todoRouter 연결
+app.use("/todo", todoRouter);
 
 // get 요청은 2가지 인자 필요 : 주소와 (요청, 응답)
 // get 요청은 크롬 등 인터넷에 http://localhost:3010 로 접근해서 확인 가능
