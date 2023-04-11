@@ -20,5 +20,10 @@ router.post("/", (req, res) => {
   res.send("트윗 생성");
 });
 
+// 게시물 수정 - UPDATE (특정 트윗 수정)
+router.put("/:id", (req, res) => {
+  res.send("트윗 수정");
+});
+
 // exports 필요
 module.exports = router;
