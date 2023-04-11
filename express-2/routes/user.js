@@ -18,5 +18,10 @@ router.put("/:id", (req, res) => {
   res.send("유저 정보 수정");
 });
 
+// 회원 정보 삭제 - DELETE
+router.delete("/:id", (req, res) => {
+  res.send("유저 정보 삭제");
+});
+
 // exports 필요
 module.exports = router;
