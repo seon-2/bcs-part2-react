@@ -8,6 +8,8 @@ const app = express();
 // 포트번호 설정
 const port = 3010;
 
+// json 형식 읽을 수 있게 하는 미들웨어 추가
+app.use(express.json());
 // /todo 경로에 todoRouter 연결
 app.use("/todo", todoRouter);
 
