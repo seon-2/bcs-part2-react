@@ -13,6 +13,18 @@ router.get("/", (req, res) => {
   res.json(todoData); // json 형식
 });
 
+// 특정 todo list 조회 - READ (http://localhost:3010/todo/1)
+router.get("/:id", (req, res) => {
+  const { id } = req.params; // id 받아오기
+
+  // 예외 처리 - 배열 인덱스를 벗어난 id가 왔을 때. 400에러
+  if (parseInt(id) >= todoData.length) {
+    res.status(400).json({ error: "존재하지 않는 ID 입니다." });
+  }
+
+  res.json(todoData[parseInt(id)]);
+});
+
 // todo 생성 - CREATE (http://localhost:3010/todo)
 router.post("/", (req, res) => {
   // FE에서 할일(title)과 설명(desc) 요청 보내기
