@@ -44,6 +44,13 @@ router.put("/:id", (req, res) => {
     res.status(400).json({ error: "존재하지 않는 ID 입니다." });
   }
 
+  // 예외 처리 - title, desc 입력이 둘 다 없을 때. 400 에러
+  if (!title && !desc) {
+    res
+      .status(400)
+      .json({ error: "title이나 desc 중 하나의 값은 입력해야 합니다." });
+  }
+
   todoData[parseInt(id)] = {
     // title: title, // 이름 같으면 생략 가능
     // desc: desc, // body로부터 받아온 데이터로 교체(update)
