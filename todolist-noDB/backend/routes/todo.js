@@ -37,6 +37,12 @@ router.post("/", (req, res) => {
   // 구조분해
   const { title, desc } = req.body;
   //   console.log(title, desc); // vscode의 터미널에서 확인 >> 피자 먹기 🍕 맛있는 피자 🍕
+
+  // 예외 처리 - title, desc 입력이 둘 중 하나라도 없을 때. 400 에러
+  if (!title || !desc) {
+    return res.status(400).json({ error: "title과 desc을 모두 입력해야 합니다." });
+  }
+
   todoData.push({ title, desc, isDone: false }); // 실제로는 DB에 push 해야 함. 로컬에 있는 todoData.json 파일이 바뀌진 않음
   //   todoData.push({ title: title, desc: desc }); // 같음!
   console.log(todoData);
