@@ -52,10 +52,9 @@ router.put("/:id", (req, res) => {
   }
 
   todoData[parseInt(id)] = {
-    // title: title, // 이름 같으면 생략 가능
-    // desc: desc, // body로부터 받아온 데이터로 교체(update)
-    title,
-    desc,
+    // title, desc 중 하나만 바뀌면 나머지는 이전값 그대로 가져오고 새로운 값만 수정
+    title: title ? title : todoData[parseInt(id)].title,
+    desc: desc ? desc : todoData[parseInt(id)].desc,
     isDone: todoData[parseInt(id)].isDone, // isDone은 원래 배열 그대로
   };
 
