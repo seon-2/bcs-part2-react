@@ -39,6 +39,11 @@ router.put("/done/:id", (req, res) => {
   //   console.log(req.params); // >> { id: '1' }
   const { id } = req.params; // id 받아오기
 
+  // 예외 처리 - 배열 인덱스를 벗어난 id가 왔을 때. 400에러
+  if (parseInt(id) >= todoData.length) {
+    res.status(400).json({ error: "존재하지 않는 ID 입니다." });
+  }
+
   todoData[parseInt(id)] = {
     title: todoData[parseInt(id)].title, // 안 바뀌는 부분. 기존 것 그대로
     desc: todoData[parseInt(id)].desc, // 안 바뀌는 부분. 기존 것 그대로
@@ -54,12 +59,17 @@ router.put("/done/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
 
+  // 예외 처리 - 배열 인덱스를 벗어난 id가 왔을 때. 400에러
+  if (parseInt(id) >= todoData.length) {
+    res.status(400).json({ error: "존재하지 않는 ID 입니다." });
+  }
+
   todoData = todoData.filter((v, i) => {
     // return 뒤의 조건이 참일 때만 결과값에 담김
     // id가 1번이면 삭제해야 함
     // i(인덱스)가 1번이 아닌 데이터만 담김(필터링)
     return parseInt(id) !== i;
-    // 지금 예제는 삭제, 추가 시 배열의 길이가 바뀌게 되어서(인덱스도 따라서 바뀌게 되기 때문에) 좋지 않음. -> json에 id 값 포함하는 것이 좋음 
+    // 지금 예제는 삭제, 추가 시 배열의 길이가 바뀌게 되어서(인덱스도 따라서 바뀌게 되기 때문에) 좋지 않음. -> json에 id 값 포함하는 것이 좋음
   });
   console.log(todoData);
 
