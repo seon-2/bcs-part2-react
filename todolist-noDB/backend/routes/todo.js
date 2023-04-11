@@ -34,5 +34,21 @@ router.post("/", (req, res) => {
   res.json(todoData);
 });
 
+// todo 완료 수정 - UPDATE (http://localhost:3010/todo/done/1)
+router.put("/done/:id", (req, res) => {
+  //   console.log(req.params); // >> { id: '1' }
+  const { id } = req.params; // id 받아오기
+
+  todoData[parseInt(id)] = {
+    title: todoData[parseInt(id)].title, // 안 바뀌는 부분. 기존 것 그대로
+    desc: todoData[parseInt(id)].desc, // 안 바뀌는 부분. 기존 것 그대로
+    isDone: !todoData[parseInt(id)].isDone, // 원래 isDone과 반대로 update. !은 not을 의미함. true <-> false
+  };
+
+  console.log(todoData);
+
+  res.json(todoData);
+});
+
 // exports 필요
 module.exports = router;
