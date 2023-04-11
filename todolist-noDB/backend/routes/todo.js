@@ -34,6 +34,29 @@ router.post("/", (req, res) => {
   res.json(todoData);
 });
 
+// todo 수정 - UPDATE (http://localhost:3010/todo/1)
+router.put("/:id", (req, res) => {
+  const { id } = req.params; // id 받아오기
+  const { title, desc } = req.body;
+
+  // 예외 처리 - 배열 인덱스를 벗어난 id가 왔을 때. 400에러
+  if (parseInt(id) >= todoData.length) {
+    res.status(400).json({ error: "존재하지 않는 ID 입니다." });
+  }
+
+  todoData[parseInt(id)] = {
+    // title: title, // 이름 같으면 생략 가능
+    // desc: desc, // body로부터 받아온 데이터로 교체(update)
+    title,
+    desc,
+    isDone: todoData[parseInt(id)].isDone, // isDone은 원래 배열 그대로
+  };
+
+  console.log(todoData);
+
+  res.json(todoData);
+});
+
 // todo 완료 수정 - UPDATE (http://localhost:3010/todo/done/1)
 router.put("/done/:id", (req, res) => {
   //   console.log(req.params); // >> { id: '1' }
