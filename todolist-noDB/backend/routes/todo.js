@@ -19,7 +19,7 @@ router.get("/:id", (req, res) => {
 
   // 예외 처리 - 배열 인덱스를 벗어난 id가 왔을 때. 400에러
   if (parseInt(id) >= todoData.length) {
-    res.status(400).json({ error: "존재하지 않는 ID 입니다." });
+    return res.status(400).json({ error: "존재하지 않는 ID 입니다." });
   }
 
   res.json(todoData[parseInt(id)]);
@@ -40,7 +40,9 @@ router.post("/", (req, res) => {
 
   // 예외 처리 - title, desc 입력이 둘 중 하나라도 없을 때. 400 에러
   if (!title || !desc) {
-    return res.status(400).json({ error: "title과 desc을 모두 입력해야 합니다." });
+    return res
+      .status(400)
+      .json({ error: "title과 desc을 모두 입력해야 합니다." });
   }
 
   todoData.push({ title, desc, isDone: false }); // 실제로는 DB에 push 해야 함. 로컬에 있는 todoData.json 파일이 바뀌진 않음
@@ -59,12 +61,12 @@ router.put("/:id", (req, res) => {
 
   // 예외 처리 - 배열 인덱스를 벗어난 id가 왔을 때. 400에러
   if (parseInt(id) >= todoData.length) {
-    res.status(400).json({ error: "존재하지 않는 ID 입니다." });
+    return res.status(400).json({ error: "존재하지 않는 ID 입니다." });
   }
 
   // 예외 처리 - title, desc 입력이 둘 다 없을 때. 400 에러
   if (!title && !desc) {
-    res
+    return res
       .status(400)
       .json({ error: "title이나 desc 중 하나의 값은 입력해야 합니다." });
   }
@@ -88,7 +90,7 @@ router.put("/done/:id", (req, res) => {
 
   // 예외 처리 - 배열 인덱스를 벗어난 id가 왔을 때. 400에러
   if (parseInt(id) >= todoData.length) {
-    res.status(400).json({ error: "존재하지 않는 ID 입니다." });
+    return res.status(400).json({ error: "존재하지 않는 ID 입니다." });
   }
 
   todoData[parseInt(id)] = {
@@ -108,7 +110,7 @@ router.delete("/:id", (req, res) => {
 
   // 예외 처리 - 배열 인덱스를 벗어난 id가 왔을 때. 400에러
   if (parseInt(id) >= todoData.length) {
-    res.status(400).json({ error: "존재하지 않는 ID 입니다." });
+    return res.status(400).json({ error: "존재하지 않는 ID 입니다." });
   }
 
   todoData = todoData.filter((v, i) => {
