@@ -13,5 +13,10 @@ router.post("/", (req, res) => {
   res.send("신규 유저 생성");
 });
 
+// 회원 정보 수정 - UPDATE (특정 유저 정보 수정)
+router.put("/:id", (req, res) => {
+  res.send("유저 정보 수정");
+});
+
 // exports 필요
 module.exports = router;
