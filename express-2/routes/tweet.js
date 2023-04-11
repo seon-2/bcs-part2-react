@@ -3,6 +3,10 @@ const express = require("express");
 // 라우터 설정
 const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.send("전체 트윗 조회");
+});
+
 // app.js 에서 app -> router
 router.get("/:id", (req, res) => {
   console.log(req.params);
