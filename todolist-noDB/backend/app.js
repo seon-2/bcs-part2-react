@@ -1,5 +1,6 @@
 // import 와 같은 기능
 const express = require("express");
+const cors = require("cors");
 const todoRouter = require("./routes/todo");
 
 // express를 사용
@@ -8,6 +9,8 @@ const app = express();
 // 포트번호 설정
 const port = 3010;
 
+// cors 미들웨어 추가
+app.use(cors());
 // json 형식 읽을 수 있게 하는 미들웨어 추가
 app.use(express.json());
 // /todo 경로에 todoRouter 연결
