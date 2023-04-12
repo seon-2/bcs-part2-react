@@ -1,11 +1,17 @@
-import { useState } from "react";
+import axios from "axios";
 
-const TodoCard = ({ title }) => {
-  const [isDone, setIsDone] = useState(false);
-
+const TodoCard = ({ title, isDone, index }) => {
   // true <-> false 바꿔주는 함수
-  const onClickToggle = () => {
-    setIsDone(!isDone);
+  const onClickToggle = async () => {
+    // api 요청
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/todo/done/${index}`
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

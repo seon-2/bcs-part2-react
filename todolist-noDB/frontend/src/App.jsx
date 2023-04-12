@@ -55,7 +55,7 @@ function App() {
         {/* toDoList가 있을 때, toDoList를 돌면서 모든 데이터 출력 */}
         {toDoList &&
           toDoList.map((v, i) => {
-            return <TodoCard key={i} title={v.title} />;
+            return <TodoCard key={i} title={v.title} isDone={v.isDone} index={i} />;
           })}
       </ul>
     </div>
