@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const TodoCard = ({ title, isDone, index }) => {
+const TodoCard = ({ title, isDone, index, getToDoList }) => {
   // true <-> false 바꿔주는 함수
   const onClickToggle = async () => {
     // api 요청
@@ -8,7 +8,14 @@ const TodoCard = ({ title, isDone, index }) => {
       const response = await axios.put(
         `${process.env.REACT_APP_BACKEND_URL}/todo/done/${index}`
       );
-      console.log(response);
+      // console.log(response);
+
+      if (response.status !== 200) {
+        alert("데이터를 불러오지 못했습니다.");
+        return;
+      }
+
+      getToDoList();
     } catch (error) {
       console.error(error);
     }
