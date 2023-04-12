@@ -26,7 +26,8 @@ function App() {
         </form>
       </div>
       <ul className="mt-16 flex flex-col w-1/2">
-        <TodoCard />
+        <TodoCard title={"👕 빨래하기"} />
+        <TodoCard title={"🧹 청소하기"} />
       </ul>
     </div>
   );
