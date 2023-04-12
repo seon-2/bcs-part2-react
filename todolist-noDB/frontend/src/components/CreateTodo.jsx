@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 
 const CreateTodo = () => {
@@ -12,6 +13,15 @@ const CreateTodo = () => {
       if (!title) {
         alert("타이틀을 입력해주세요!");
       }
+      // axios 요청이 올 때 까지 기다렸다가 
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/todo`,
+        {
+          title, // 생략 가능
+          desc: `${title} 아자아자 화이팅!`,
+        }
+      );
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
