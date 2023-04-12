@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CreateTodo from "./components/CreateTodo";
 import TodoCard from "./components/TodoCard";
 
 function App() {
@@ -27,7 +28,6 @@ function App() {
       }
 
       setToDoList(response.data);
-
     } catch (error) {
       console.error(error);
     }
@@ -49,17 +49,7 @@ function App() {
           과거가 널 아프게 할 수도 있다. 하지만 과거에서 도망치는 것도 과거에서
           배우는 것도 네 선택이다. - 라이온 킹 🦁
         </div>
-        <form className="flex mt-2">
-          <input
-            className="grow border-2 border-pink-200 rounded-lg focus:outline-pink-400 px-2 py-1 text-lg"
-            type="text"
-          />
-          <input
-            className="ml-4 px-2 py-1 bg-pink-300 hover:bg-pink-400 rounded-lg text-gray-50"
-            type="submit"
-            value="todo 생성"
-          />
-        </form>
+        <CreateTodo />
       </div>
       <ul className="mt-16 flex flex-col w-1/2">
         {/* toDoList가 있을 때, toDoList를 돌면서 모든 데이터 출력 */}
