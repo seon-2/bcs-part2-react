@@ -49,7 +49,7 @@ function App() {
           과거가 널 아프게 할 수도 있다. 하지만 과거에서 도망치는 것도 과거에서
           배우는 것도 네 선택이다. - 라이온 킹 🦁
         </div>
-        <CreateTodo />
+        <CreateTodo getToDoList={getToDoList} />
       </div>
       <ul className="mt-16 flex flex-col w-1/2">
         {/* toDoList가 있을 때, toDoList를 돌면서 모든 데이터 출력 */}
