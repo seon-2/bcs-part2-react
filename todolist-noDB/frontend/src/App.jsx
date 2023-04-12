@@ -1,6 +1,32 @@
+import axios from "axios";
+import { useEffect } from "react";
 import TodoCard from "./components/TodoCard";
 
 function App() {
+  // axios는 비동기 -> 함수 따로 만들어서 async, await && try catch
+  // axios는 http 통신을 도와주는 라이브러리! (http 통신 : FE와 BE 연결)
+  const getToDoList = async () => {
+    try {
+      // get() 안에 주소 넣기
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/todo`
+      );
+      console.log(response);
+      /**
+       * ERROR 발생 - CORS
+       * AxiosError
+       * Access to XMLHttpRequest at 'http://localhost:3010/todo' from origin 'http://localhost:3000' has been blocked by CORS policy...
+       * => CORS 라이브러리 설치 필요
+       */
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getToDoList();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col justify-start items-center pt-16">
       <h1 className="text-4xl font-bold">🌷 AWESOME TO DO LIST 🌷</h1>
