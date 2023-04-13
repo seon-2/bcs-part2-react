@@ -1,8 +1,13 @@
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 
 const port = 3010;
+
+// 미들웨어 추가
+app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello, Express!");
