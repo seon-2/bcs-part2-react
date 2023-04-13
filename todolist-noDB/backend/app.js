@@ -9,8 +9,13 @@ const app = express();
 // 포트번호 설정
 const port = 3010;
 
-// cors 미들웨어 추가
-app.use(cors());
+// cors 미들웨어 추가 - http://localhost:3000 만 허용하도록 수정
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 // json 형식 읽을 수 있게 하는 미들웨어 추가
 app.use(express.json());
 // /todo 경로에 todoRouter 연결
