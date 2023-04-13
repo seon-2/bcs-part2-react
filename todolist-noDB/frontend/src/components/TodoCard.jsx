@@ -1,4 +1,5 @@
 import axios from "axios";
+import { FiTrash2 } from "react-icons/fi";
 
 const TodoCard = ({ title, isDone, index, getToDoList }) => {
   // true <-> false 바꿔주는 함수
@@ -39,25 +40,28 @@ const TodoCard = ({ title, isDone, index, getToDoList }) => {
   };
 
   return (
-    <>
+    <div className="flex my-4">
       {isDone ? (
-        // 완료 처리
-        <li className="flex my-4" onClick={onClickToggle}>
-          <div className="relative">
-            <div className="border-4 border-pink-400 w-8 h-8 rounded-xl"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-4 border-white bg-pink-400 w-8 h-8 scale-75 rounded-xl"></div>
-          </div>
+        <>
+          <button className="relative" onClick={onClickToggle}>
+            <div className="border-4 border-pink-400 w-8 h-8 rounded-xl bg-pink-400 p-2"></div>
+            <div className="absolute border-4 border-white top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-8 h-8 scale-75 rounded-xl bg-pink-400 p-2"></div>
+          </button>
           <div className="text-2xl ml-4 line-through">{title}</div>
-          <button onClick={onClickDelete}>삭제</button>
-        </li>
+        </>
       ) : (
-        <li className="flex my-4" onClick={onClickToggle}>
-          <div className="border-4 border-pink-400 w-8 h-8 rounded-xl"></div>
-          <div className="text-2xl ml-4 ">{title}</div>
-          <button onClick={onClickDelete}>삭제</button>
-        </li>
+        <>
+          <button
+            className="border-4 border-pink-400 w-8 h-8 rounded-xl"
+            onClick={onClickToggle}
+          ></button>
+          <div className="text-2xl ml-4">{title}</div>
+        </>
       )}
-    </>
+      <button className="ml-4 hover:text-pink-400" onClick={onClickDelete}>
+        <FiTrash2 size={24} />
+      </button>
+    </div>
   );
 };
 export default TodoCard;
