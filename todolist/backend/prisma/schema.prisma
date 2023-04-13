@@ -6,6 +6,40 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+// User 라는 표 만들기
+model User {
+  // 정수형 데이터를 담는 id를 @id로 설정. 모델 당 @id는 꼭 하나씩 있어야 함
+  // autoincrement : 값 생성하면 숫자 자동으로 증가하게 
+  id Int @id @default(autoincrement())
+  // @unique : 중복이 되면 안되는 속성에 
+  accout String @unique
+  // ? : 반드시 필요한 값은 아닐 때 비어 있어도(null) 됨
+  name String?
+  // Todo를 참조한다는 개념. Todo model과의 관계 1:n (user 한 명은 todo를 여러 개 가질 수 있음)
+  todos Todo[]
+  // DateTime이라는 시간 자료형이 따로 있음. 생성될 때 현재 시각을 기본값으로
+  createdAt DateTime @default(now())
+  // @updatedAt : prisma에 있는 기능. 수정시각을 반영함
+  updatedAt DateTime @updatedAt
+}
+
+model Todo {
+  id Int @id @default(autoincrement())
+  todo String
+  isDone Boolean
+  // n쪽에서 관계 적어줘야 함. 모델을 type으로 받아옴 
+  // (fields: 받아와서 쓸 값, references: 받아올 값) id는 User의 id
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 인덱싱 작업 : 검색 효율이 높아짐 (mysql 사용 시 필요. postgresql 사용 시에는 필요 없음)
+  @@index([userId])
+
 }
