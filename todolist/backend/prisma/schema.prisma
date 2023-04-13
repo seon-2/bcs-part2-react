@@ -17,7 +17,7 @@ model User {
   // autoincrement : 값 생성하면 숫자 자동으로 증가하게 
   id Int @id @default(autoincrement())
   // @unique : 중복이 되면 안되는 속성에 
-  accout String @unique
+  account String @unique
   // ? : 반드시 필요한 값은 아닐 때 비어 있어도(null) 됨
   name String?
   // Todo를 참조한다는 개념. Todo model과의 관계 1:n (user 한 명은 todo를 여러 개 가질 수 있음)
