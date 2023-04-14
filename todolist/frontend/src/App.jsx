@@ -1,4 +1,28 @@
+import { useState } from "react";
+
 function App() {
+  const [user, setUser] = useState();
+
+  // return도 결과값으로 줄 수 있음 user 없으면 로그인 페이지 보여주기
+  if (!user) {
+    // 유저가 아직 로그인 안 함 - 로그인페이지
+    return (
+      <div className="min-h-screen flex flex-col justify-center items-center">
+        <form className="flex mt-2 my-16">
+          <input
+            className="grow border-2 border-pink-200 rounded-lg focus:outline-pink-400 px-2 py-1 text-lg"
+            type="text"
+          />
+          <input
+            className="ml-4 px-2 py-1 bg-pink-400 rounded-lg text-gray-50 w-24"
+            type="submit"
+            value="계정 생성"
+          />
+        </form>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col justify-start items-center pt-16">
       <h1 className="text-4xl font-bold">AWESOME TO DO LIST 😎</h1>
