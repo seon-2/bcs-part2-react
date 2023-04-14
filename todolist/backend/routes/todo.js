@@ -134,6 +134,11 @@ router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { userId } = req.body;
+    /**
+     * 실제로는 body에 userId를 바로 넣지 않고 
+     * (악의적인 누군가가 userId를 알고 있으면 body에 넣어서 임의로 삭제할 수 있음)
+     * Session이나 JWT를 사용해 보안성을 높임
+     */
 
     // id를 통해 todo가 존재하는지 확인
     const existTodo = await client.todo.findUnique({
