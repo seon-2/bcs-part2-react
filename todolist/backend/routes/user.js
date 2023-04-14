@@ -54,6 +54,13 @@ router.get("/:account", async (req, res) => {
       },
     });
 
+    if (!user) {
+      return res.status(400).json({
+        ok: false,
+        error: "Not exist user.",
+      });
+    }
+
     res.json({
       ok: true,
       user,
