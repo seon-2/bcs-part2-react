@@ -86,6 +86,7 @@ router.get("/:userId", async (req, res) => {
 router.put("/:id/done", async (req, res) => {
   try {
     const { id } = req.params;
+    const { userId } = req.body;
 
     // id를 통해 todo가 존재하는지 확인
     const existTodo = await client.todo.findUnique({
@@ -100,6 +101,13 @@ router.put("/:id/done", async (req, res) => {
     // 예외처리 : todo가 존재하지 않을 때
     if (!existTodo) {
       return res.status(400).json({ ok: false, error: "Not exist todo." });
+    }
+
+    // 예외처리 : 수정하려는 userId가 현재 todo의 userId와 같은지
+    if (existTodo.userId !== parseInt(userId)) {
+      return res
+        .status(400)
+        .json({ ok: false, error: "You are not todo's owner." });
     }
 
     // id를 통해 todo의 상태값(isDone) 확인
