@@ -121,4 +121,41 @@ router.put("/:id/done", async (req, res) => {
   }
 });
 
+// 투두 삭제 - DELETE
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.body;
+
+    // id를 통해 todo가 존재하는지 확인
+    const existTodo = await client.todo.findUnique({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // 예외처리 : todo가 존재하지 않을 때
+    if (!existTodo) {
+      return res.status(400).json({ ok: false, error: "Not exist todo." });
+    }
+
+    // 삭제하려는 userId가 현재 todo의 userId와 같은지
+    if (existTodo.userId !== parseInt(userId)) {
+      return res
+        .status(400)
+        .json({ ok: false, error: "You are not todo's owner." });
+    }
+
+    const deletedTodo = await client.todo.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    res.json({ ok: true, todo: deletedTodo });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 module.exports = router;
