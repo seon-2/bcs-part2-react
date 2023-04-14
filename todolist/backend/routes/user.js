@@ -43,4 +43,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+// user 조회 - GET
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+
+    res.send("임시");
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 module.exports = router;
