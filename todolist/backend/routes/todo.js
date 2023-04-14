@@ -82,4 +82,43 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
+// 투두 완료 - PUT
+router.put("/:id/done", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // id를 통해 todo가 존재하는지 확인
+    const existTodo = await client.todo.findUnique({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // console.log(existTodo); // 없으면 null
+    // res.send("임시");
+
+    // 예외처리 : todo가 존재하지 않을 때
+    if (!existTodo) {
+      return res.status(400).json({ ok: false, error: "Not exist todo." });
+    }
+
+    // id를 통해 todo의 상태값(isDone) 확인
+    const updatedTodo = await client.todo.update({
+      // 조회
+      where: {
+        id: parseInt(id),
+      },
+      // 변경
+      // isDone을 가져와서 반대로 뒤집어주기
+      data: {
+        isDone: !existTodo.isDone,
+      },
+    });
+
+    res.json({ ok: true, todo: updatedTodo });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 module.exports = router;
