@@ -44,12 +44,20 @@ router.post("/", async (req, res) => {
 });
 
 // user 조회 - GET
-router.get("/:id", async (req, res) => {
+router.get("/:account", async (req, res) => {
   try {
-    const { id } = req.params;
-    console.log(id);
+    const { account } = req.params;
 
-    res.send("임시");
+    const user = await client.user.findUnique({
+      where: {
+        account,
+      },
+    });
+
+    res.json({
+      ok: true,
+      user,
+    });
   } catch (error) {
     console.error(error);
   }
