@@ -7,21 +7,46 @@ import CreateTodo from "./components/CreateTodo";
 function App() {
   const [user, setUser] = useState();
   const [todos, setTodos] = useState();
+  const [skip, setSkip] = useState(0);
 
   const onClickLogOut = () => {
     setUser(undefined);
   };
+
+  const onClickReload = async () => {
+    try {
+      if (!user) return;
+
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/todo/${user.id}?skip=${skip}`
+      );
+
+      // console.log(response);
+
+      // 다음 skip(3개) 아래에 붙여서 추가로 보여주기
+      // 나중에는 useRef 써서 스크롤 내리면 더 보여지도록 할 수 있음
+      setTodos([...todos, ...response.data.todos]);
+
+      setSkip(skip + 3);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // todo list 가져오는 함수 - GET
   const getTodos = async () => {
     try {
       if (!user) return;
 
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/todo/${user.id}`
+        `${process.env.REACT_APP_BACKEND_URL}/todo/${user.id}?skip=${skip}`
       );
 
       console.log(response);
       setTodos(response.data.todos);
+
+      // 다음 skip
+      setSkip(skip + 3);
     } catch (error) {
       console.error(error);
       alert("todo list를 불러오지 못했습니다.");
@@ -67,6 +92,14 @@ function App() {
           에비브러햄 링컨
         </div>
         <CreateTodo userId={user.id} setTodos={setTodos} todos={todos} />
+      </div>
+      <div className="mt-16 ">
+        <button
+          className="ml-4 px-4 py-2 w-24 h-24 bg-pink-200 hover:bg-pink-400 rounded-full text-gray-50 text-2xl"
+          onClick={onClickReload}
+        >
+          갱 신
+        </button>
       </div>
       <div className="mt-16 flex flex-col w-1/2">
         {todos &&

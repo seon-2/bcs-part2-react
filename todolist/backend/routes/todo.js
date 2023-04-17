@@ -49,6 +49,7 @@ router.post("/", async (req, res) => {
 router.get("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
+    const { skip } = req.query;
 
     // todo 조회 전, user 있는지 체크
     const user = await client.user.findMany({
@@ -76,6 +77,9 @@ router.get("/:userId", async (req, res) => {
         // 정렬 desc : 내림차순(최근 -> 과거), asc : 오름차순
         createdAt: "desc",
       },
+      // 페이징 기능. take만큼 가져옴. skip이 take 만큼 커짐. 
+      skip: parseInt(skip),
+      take: 3,
     });
 
     // console.log(todos);
