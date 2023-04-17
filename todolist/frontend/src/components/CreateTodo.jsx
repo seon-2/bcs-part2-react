@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 // todo 생성 - CREATE
-const CreateTodo = ({ userId }) => {
+const CreateTodo = ({ userId, getTodos }) => {
   // 입력창에서 받는, 사용자가 작성하는 to 저장하는 변수
   const [todo, setTodo] = useState("");
 
@@ -18,9 +18,16 @@ const CreateTodo = ({ userId }) => {
         }
       );
 
-      console.log(response);
+      //   console.log(response);
+
+      // 완료 되었을 때 투두리스트 갱신
+      getTodos();
+      
+      // 검색창 초기화
+      setTodo("");
     } catch (error) {
       console.error(error);
+      alert("todo 생성 중 에러가 발생하였습니다.")
     }
   };
 

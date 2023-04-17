@@ -39,7 +39,6 @@ function App() {
     console.log(user);
   }, [user]);
 
-
   // return도 결과값으로 줄 수 있음 user 없으면 로그인 페이지 보여주기
   if (!user) {
     // 유저가 아직 로그인 안 함 - 로그인페이지
@@ -67,7 +66,7 @@ function App() {
           나무 베는데 한 시간이 주어진다면, 도끼를 가는데 45분을 쓰겠다,
           에비브러햄 링컨
         </div>
-        <CreateTodo userId={user.id} />
+        <CreateTodo userId={user.id} getTodos={getTodos} />
       </div>
       <div className="mt-16 flex flex-col w-1/2">
         {todos &&
