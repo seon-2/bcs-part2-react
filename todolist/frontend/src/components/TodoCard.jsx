@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { FiTrash2 } from "react-icons/fi";
 
-const TodoCard = ({ todo, isDone, id, userId }) => {
+const TodoCard = ({ todo, isDone, id, userId, todos, setTodos }) => {
   const [todoIsDone, setTodoIsDone] = useState(isDone);
 
-  // todo 완료 - UPDATE  
+  // todo 완료 - UPDATE
   const onClickDone = async () => {
     try {
       const response = await axios.put(
@@ -15,6 +16,28 @@ const TodoCard = ({ todo, isDone, id, userId }) => {
       );
       // response에는 업데이트 된 todo 정보 들어있음
       setTodoIsDone(response.data.todo.isDone);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // todo 삭제 - DELETE
+  const onClickDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/todo/${id}`,
+        // axios.delete는 data로 한 번 더 감싸줘야 함!
+        {
+          data: { userId },
+        }
+      );
+
+      // 삭제 반영 refresh - filter() 사용
+      const array = todos.filter((v, i) => {
+        return v.id !== response.data.todo.id;
+      });
+
+      setTodos(array);
     } catch (error) {
       console.error(error);
     }
@@ -36,6 +59,12 @@ const TodoCard = ({ todo, isDone, id, userId }) => {
           ></button>
         )}
         <div className="text-2xl ml-4 truncate">{todo}</div>
+        <button
+          className="ml-4 hover:text-pink-400 hover:scale-125 ease-linear duration-300"
+          onClick={onClickDelete}
+        >
+          <FiTrash2 size={24} />
+        </button>
       </div>
     </>
   );
