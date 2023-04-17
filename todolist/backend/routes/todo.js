@@ -72,6 +72,10 @@ router.get("/:userId", async (req, res) => {
       where: {
         userId: parseInt(userId),
       },
+      orderBy: {
+        // 정렬 desc : 내림차순(최근 -> 과거), asc : 오름차순
+        createdAt: "desc",
+      },
     });
 
     // console.log(todos);
@@ -135,7 +139,7 @@ router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     const { userId } = req.body;
     /**
-     * 실제로는 body에 userId를 바로 넣지 않고 
+     * 실제로는 body에 userId를 바로 넣지 않고
      * (악의적인 누군가가 userId를 알고 있으면 body에 넣어서 임의로 삭제할 수 있음)
      * Session이나 JWT를 사용해 보안성을 높임
      */
