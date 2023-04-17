@@ -23,7 +23,8 @@ const CreateTodo = ({ userId, todos, setTodos }) => {
       // 완료 되었을 때 투두리스트 갱신
       // 기존 방법은 DB에서 모든 부분을 가져오므로 데이터 낭비 발생
       // 키값이 기준
-      setTodos([...todos, response.data.todo]);
+      // 새로 생성하는 todo 가장 위에
+      setTodos([response.data.todo, ...todos]);
 
       // 검색창 초기화
       setTodo("");
