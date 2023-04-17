@@ -1,13 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogIn from "./components/Login";
 import TodoCard from "./components/TodoCard";
+import axios from "axios";
 
 function App() {
   const [user, setUser] = useState();
+  const [todos, setTodos] = useState();
 
   const onClickLogOut = () => {
     setUser(undefined);
   };
+  // todo list 가져오는 함수 - GET
+  const getTodos = async () => {
+    try {
+      if (!user) return;
+
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/todo/${user.id}`
+      );
+
+      console.log(response);
+      setTodos(response.data.todos);
+    } catch (error) {
+      console.error(error);
+      alert("todo list를 불러오지 못했습니다.");
+    }
+  };
+
+  // 유저가 있어야 todo도 불러올 수 있음
+  useEffect(() => {
+    // 로그인 전에도 App.jsx는 렌더링 되기 때문에 user 없을 때는 useEffect 빠져나가도록
+    // 아래 if문이 getTodos() 안에 있어도 같은 기능 함
+    // if (!user) return;
+
+    // todo list 가져오기
+    getTodos();
+    console.log(user);
+  }, [user]);
+
 
   // return도 결과값으로 줄 수 있음 user 없으면 로그인 페이지 보여주기
   if (!user) {
@@ -49,7 +79,10 @@ function App() {
         </form>
       </div>
       <div className="mt-16 flex flex-col w-1/2">
-        <TodoCard />
+        {todos &&
+          todos.map((v, i) => {
+            return <TodoCard key={i} todo={v.todo} isDone={v.isDone} />;
+          })}
       </div>
     </div>
   );
