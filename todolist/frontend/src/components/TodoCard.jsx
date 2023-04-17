@@ -11,11 +11,9 @@ const TodoCard = ({ todo, isDone }) => {
             <div className="text-2xl ml-4 truncate">{todo}</div>
           </>
         ) : (
-          <>
-            <div className="border-4 border-pink-400 w-8 h-8 rounded-xl"></div>
-            <div className="text-2xl ml-4 truncate">{todo}</div>
-          </>
+          <div className="border-4 border-pink-400 w-8 h-8 rounded-xl"></div>
         )}
+        <div className="text-2xl ml-4 truncate">{todo}</div>
       </div>
     </>
   );
