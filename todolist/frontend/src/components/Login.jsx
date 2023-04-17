@@ -23,6 +23,9 @@ const LogIn = ({ setUser }) => {
       console.log(response);
     } catch (error) {
       console.error(error);
+      // 이미 있는 계정 생성 시 alert 띄우기
+      // try 안에서 if문으로 검사하면 작동 안 함
+      alert("계정 생성에 실패하였습니다.");
     }
   };
 
