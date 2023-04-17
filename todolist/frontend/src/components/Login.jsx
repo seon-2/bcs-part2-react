@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const LogIn = () => {
+const LogIn = ({ setUser }) => {
   const [createAccount, setCreateAccount] = useState("");
 
   // 유저 생성 - CREATE
@@ -17,6 +17,8 @@ const LogIn = () => {
           account: createAccount,
         }
       );
+
+      setUser(response.data.user);
 
       console.log(response);
     } catch (error) {
