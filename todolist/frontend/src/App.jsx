@@ -4,15 +4,28 @@ import LogIn from "./components/Login";
 function App() {
   const [user, setUser] = useState();
 
+  const onClickLogOut = () => {
+    setUser(undefined);
+  };
+
   // return도 결과값으로 줄 수 있음 user 없으면 로그인 페이지 보여주기
   if (!user) {
     // 유저가 아직 로그인 안 함 - 로그인페이지
-    return <LogIn setUser={setUser}/>;
+    return <LogIn setUser={setUser} />;
   }
 
   return (
     <div className="min-h-screen flex flex-col justify-start items-center pt-16">
-      <h1 className="text-4xl font-bold">{user.account}'s AWESOME TO DO LIST 😎</h1>
+      <h1 className="text-4xl font-bold">
+        {user.account}'s AWESOME TO DO LIST 😎
+        <button
+          className="ml-4 px-2 py-1 bg-pink-200 hover:bg-pink-400 rounded-lg text-gray-50 text-base"
+          onClick={onClickLogOut}
+        >
+          로그아웃
+        </button>
+      </h1>
+
       <div>
         <div className="mt-8 text-sm font-semibold">
           If I only had an hour to chop down a tree, I would spend the first 45
