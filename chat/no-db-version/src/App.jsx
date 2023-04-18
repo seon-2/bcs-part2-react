@@ -4,11 +4,16 @@ import { useState } from "react";
 function App() {
   const [content, setContent] = useState("");
   const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // gpt에 질문 보내기 - POST
   const onSubmitChat = async (e) => {
     try {
       e.preventDefault();
+
+      if (!content) return;
+
+      setIsLoading(true);
 
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
@@ -25,8 +30,13 @@ function App() {
       );
 
       setResult(response.data.choices[0].message.content);
+
+      setIsLoading(false);
+      setContent("");
     } catch (error) {
       console.error(error);
+
+      setIsLoading(false);
     }
   };
 
@@ -34,14 +44,21 @@ function App() {
     <div className="max-w-screen-md mx-auto min-h-screen flex flex-col justify-start items-center pt-16 px-4">
       <form className="flex w-full" onSubmit={onSubmitChat}>
         <input
-          className="grow border-2 border-gray-300 rounded-lg focus:outline-main shadow-lg"
+          className={`grow border-2 px-2 py-1 border-gray-300 rounded-lg focus:outline-main shadow-lg ${
+            isLoading && "bg-gray-200"
+          }`}
           type="text"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          disabled={isLoading}
         />
         <input
-          className="ml-4 px-2 py-1 border-2 border-main text-main rounded-lg shadow-lg"
+          className={`w-24 ml-4 px-2 py-1 border-2 border-main text-main rounded-lg shadow-lg ${
+            isLoading && "bg-main text-gray-200"
+          }`}
           type="submit"
+          disabled={isLoading}
+          value={isLoading ? "검색중..." : "검색"}
         />
       </form>
       <div className="mt-16 bg-main p-4 text-gray-50">
