@@ -11,6 +11,12 @@ function App() {
           type="submit"
         />
       </form>
+      <div className="mt-16 bg-main p-4 text-gray-50">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ipsa a
+        autem voluptatem est molestias recusandae quis! Reiciendis voluptas
+        asperiores perferendis ex mollitia nisi illum, iste ea possimus officia
+        non?
+      </div>
     </div>
   );
 }
