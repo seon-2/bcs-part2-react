@@ -52,6 +52,8 @@ app.post("/chat", async (req, res) => {
     res.send("임시");
   } catch (error) {
     console.error(error);
+    
+    res.json({ ok: false, error });
   }
 });
 
