@@ -61,11 +61,7 @@ function App() {
           value={isLoading ? "검색중..." : "검색"}
         />
       </form>
-      <div className="mt-16 bg-main p-4 text-gray-50">
-        {result && (
-          <div className="mt-16 bg-main p-4 text-gray-50">{result}</div>
-        )}
-      </div>
+      {result && <div className="mt-16 bg-main p-4 text-gray-50">{result}</div>}
     </div>
   );
 }
