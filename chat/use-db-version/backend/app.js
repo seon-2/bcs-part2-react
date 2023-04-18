@@ -2,11 +2,11 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 
 const port = process.env.PORT;
-const axios = require("axios");
 
 app.use(cors());
 app.use(express.json());
@@ -47,9 +47,9 @@ app.post("/chat", async (req, res) => {
       }
     );
 
-    res.json({ ok: true, result: response.data.choices[0].message.content });
+    console.log(response.data.choices[0].message.content);
 
-    res.send("임시");
+    res.json({ ok: true, result: response.data.choices[0].message.content });
   } catch (error) {
     console.error(error);
     
