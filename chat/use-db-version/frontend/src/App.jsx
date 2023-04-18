@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [content, setContent] = useState("");
@@ -7,9 +8,32 @@ function App() {
 
   const onSubmitChat = async (e) => {
     try {
-      e.preventDefualt();
+      e.preventDefault();
+
+      if (!content) return;
+
+      setIsLoading(true);
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/chat`,
+        {
+          content,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_SECRET_KEY}`,
+          },
+        }
+      );
+
+      console.log(response);
+      setResult(response.data.result);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
+
+      setIsLoading(false);
     }
   };
 
@@ -27,7 +51,7 @@ function App() {
         />
         <input
           className={`w-24 ml-4 px-2 py-1 border-2 border-main text-main rounded-lg shadow-lg ${
-            isLoading && "bg-main text-gray-200"
+            isLoading && "bg-main text-white"
           }`}
           type="submit"
           disabled={isLoading}
