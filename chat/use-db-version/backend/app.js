@@ -6,6 +6,7 @@ const cors = require("cors");
 const app = express();
 
 const port = process.env.PORT;
+const axios = require("axios");
 
 app.use(cors());
 app.use(express.json());
@@ -30,6 +31,23 @@ app.post("/chat", async (req, res) => {
     if (!content) {
       return res.status(400).json({ ok: false, error: "질문을 입력해주세요." });
     }
+
+    // 백엔드와 openAI 소통
+    const response = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content }],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.OPENAI_KEY}`,
+        },
+      }
+    );
+
+    res.json({ ok: true, result: response.data.choices[0].message.content });
 
     res.send("임시");
   } catch (error) {
