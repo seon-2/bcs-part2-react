@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function App() {
   const [content, setContent] = useState("");
+  const [result, setResult] = useState("");
 
   // gpt에 질문 보내기 - POST
   const onSubmitChat = async (e) => {
@@ -23,7 +24,7 @@ function App() {
         }
       );
 
-      console.log(response);
+      setResult(response.data.choices[0].message.content);
     } catch (error) {
       console.error(error);
     }
@@ -44,10 +45,9 @@ function App() {
         />
       </form>
       <div className="mt-16 bg-main p-4 text-gray-50">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ipsa a
-        autem voluptatem est molestias recusandae quis! Reiciendis voluptas
-        asperiores perferendis ex mollitia nisi illum, iste ea possimus officia
-        non?
+        {result && (
+          <div className="mt-16 bg-main p-4 text-gray-50">{result}</div>
+        )}
       </div>
     </div>
   );
