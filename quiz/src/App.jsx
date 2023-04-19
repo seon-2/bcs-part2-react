@@ -13,11 +13,11 @@ import D from "./components/D";
 
 function App() {
   return (
-    <div className="bg-red-100 h-screen flex justify-center items-center">
+    <div className="bg-red-100 h-screen flex flex-col justify-center items-center">
       <A></A>
-      {/* <B></B> */}
-      {/* <C></C> */}
-      {/* <D></D> */}
+      <B></B>
+      <C></C>
+      <D></D>
     </div>
   );
 }
