@@ -27,9 +27,6 @@ function App() {
   const onClickLogOut = () => {
     setAccount("");
   };
-  <button className="ml-4 btn-style" onClick={onClickLogOut}>
-    로그아웃
-  </button>;
 
   return (
     <div className="bg-red-100 min-h-screen flex justify-center items-center">
