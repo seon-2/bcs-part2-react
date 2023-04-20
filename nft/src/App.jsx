@@ -1,4 +1,13 @@
 import { useEffect, useState } from "react";
+import Web3 from "web3";
+import { ABI, CONTRACT_ADDRESS } from "./web3.config";
+
+// web3 선언
+// const web3 = new Web3();
+// mumbai로 web3 선언
+const web3 = new Web3("https://rpc-mumbai.maticvigil.com");
+// contract 선언
+const contract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
 
 function App() {
   const [account, setAccount] = useState("");
@@ -27,6 +36,12 @@ function App() {
   const onClickLogOut = () => {
     setAccount("");
   };
+
+  // web3 확인해보기
+  useEffect(() => {
+    console.log(web3);
+    console.log(contract);
+  }, []);
 
   return (
     <div className="bg-red-100 min-h-screen flex justify-center items-center">
