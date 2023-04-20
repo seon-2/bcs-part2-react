@@ -26,7 +26,9 @@ function App() {
   return (
     <div className="bg-red-100 min-h-screen flex justify-center items-center">
       {account ? (
-        account
+        <div className="text-main font-semibold">
+          {account.substring(0, 4)}...{account.substring(account.length - 4)}
+        </div>
       ) : (
         <button className="btn-style" onClick={onClickAccount}>
           <img
