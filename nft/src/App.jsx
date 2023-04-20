@@ -11,6 +11,7 @@ const contract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
 
 function App() {
   const [account, setAccount] = useState("");
+  const [myBalance, setMyBalance] = useState();
 
   // 메타마스크 있을 때 Proxy 출력, 없으면 undefined
   // useEffect(() => {
@@ -37,6 +38,19 @@ function App() {
     setAccount("");
   };
 
+  const onClickBalance = async () => {
+    try {
+      if (!account || !contract) return;
+
+      const balance = await contract.methods.balanceOf(account).call();
+
+      // console.log(balance);
+      setMyBalance(web3.utils.fromWei(balance));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // web3 확인해보기
   useEffect(() => {
     console.log(web3);
@@ -46,11 +60,20 @@ function App() {
   return (
     <div className="bg-red-100 min-h-screen flex justify-center items-center">
       {account ? (
-        <div className="text-main font-semibold">
-          {account.substring(0, 4)}...{account.substring(account.length - 4)}
-          <button className="ml-4 btn-style" onClick={onClickLogOut}>
-            로그아웃
-          </button>
+        <div>
+          <div className="text-main font-semibold text-2xl">
+            {account.substring(0, 4)}...
+            {account.substring(account.length - 4)}
+            <button className="ml-4 btn-style" onClick={onClickLogOut}>
+              로그아웃
+            </button>
+          </div>
+          <div className="flex items-center mt-4">
+            {myBalance && <div>{myBalance} bcs3</div>}
+            <button className="ml-2 btn-style" onClick={onClickBalance}>
+              잔액 조회
+            </button>
+          </div>
         </div>
       ) : (
         <button className="btn-style" onClick={onClickAccount}>
