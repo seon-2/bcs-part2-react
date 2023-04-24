@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
-import { TOKEN_CONTRACT_ABI, TOKEN_CONTRACT_ADDRESS } from "./web3.config";
+import {
+  MINT_CONTRACT_ABI,
+  MINT_CONTRACT_ADDRESS,
+  TOKEN_CONTRACT_ABI,
+  TOKEN_CONTRACT_ADDRESS,
+} from "./web3.config";
 
 // web3 선언
 // const web3 = new Web3();
-// mumbai로 web3 선언
-const web3 = new Web3("https://rpc-mumbai.maticvigil.com");
+// 메타마스크 연결된 provider로 web3 선언
+const web3 = new Web3(window.ethereum);
 // token contract 선언
 const tokenContract = new web3.eth.Contract(
   TOKEN_CONTRACT_ABI,
   TOKEN_CONTRACT_ADDRESS
+);
+// nft contract 선언
+const nftContract = new web3.eth.Contract(
+  MINT_CONTRACT_ABI,
+  MINT_CONTRACT_ADDRESS
 );
 
 function App() {
@@ -40,6 +50,7 @@ function App() {
   const onClickLogOut = () => {
     setAccount("");
   };
+
   // 잔액조회 기능
   const onClickBalance = async () => {
     try {
@@ -49,6 +60,23 @@ function App() {
 
       // console.log(balance);
       setMyBalance(web3.utils.fromWei(balance));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 민팅 기능
+  const onClickMint = async () => {
+    try {
+      const result = await nftContract.methods
+        .mintNft(
+          "https://gateway.pinata.cloud/ipfs/QmYKncC786nYN97h9T3tz7KnCy59sEhjSQw36Y1NsTPYiA"
+        )
+        .send({
+          from: account,
+        });
+
+      console.log(result);
     } catch (error) {
       console.error(error);
     }
@@ -75,6 +103,11 @@ function App() {
             {myBalance && <div>{myBalance} bcs3</div>}
             <button className="ml-2 btn-style" onClick={onClickBalance}>
               잔액 조회
+            </button>
+          </div>
+          <div className="flex items-center mt-4">
+            <button className="ml-2 btn-style" onClick={onClickMint}>
+              민팅
             </button>
           </div>
         </div>
