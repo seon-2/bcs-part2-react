@@ -5,9 +5,10 @@ const { NETWORK } = require(`${basePath}/constants/network.js`);
 const network = NETWORK.eth;
 
 // General metadata for Ethereum
-const namePrefix = "Your Collection";
-const description = "Remember to replace this description";
-const baseUri = "ipfs://NewUriToReplace";
+const namePrefix = "my Collection";
+const description = "bcs 3rd";
+const baseUri =
+  "https://gateway.pinata.cloud/ipfs/QmSbTCUDPr5sHMHVmfmSNh4WTaHPeBKz9Fa5pDgHc8DEkx";
 
 const solanaMetadata = {
   symbol: "YC",
