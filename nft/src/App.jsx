@@ -70,36 +70,37 @@ function App() {
   // 민팅 기능
   const onClickMint = async () => {
     try {
-      const result = await nftContract.methods
-        .mintNft(
-          "https://gateway.pinata.cloud/ipfs/QmYKncC786nYN97h9T3tz7KnCy59sEhjSQw36Y1NsTPYiA"
-        )
-        .send({
-          from: account,
-        });
+      const uri =
+        "https://gateway.pinata.cloud/ipfs/QmYKncC786nYN97h9T3tz7KnCy59sEhjSQw36Y1NsTPYiA";
+
+      const result = await nftContract.methods.mintNft(uri).send({
+        from: account,
+      });
 
       console.log(result);
       // false면 (민팅 안되었으면) 넘어가기
       if (!result.status) return;
+      // tokenURI에서 받아오는 uri가 mintNft에 보내는 주소와 같음!!
+      // 정석버전으로 한 이유는 컨트랙트로부터 데이터를 받아오는 방법을 알아보기 위해서
 
       // 민팅한 nft 이미지를 화면에 보여주기 (정석?적인 방법) - 문제점 : 사용자가 응답 받는 시간이 느림.
       // balanceOf에서 내(넣은 주소)가 가진 nft의 총 개수를 알 수 있음.
-      const balanceOf = await nftContract.methods.balanceOf(account).call();
-      // console.log(balanceOf);
+      // const balanceOf = await nftContract.methods.balanceOf(account).call();
+      // // console.log(balanceOf);
 
-      // tokenOfOwnerByIndex에서 주소와 index를 넣으면 내(넣은 주소)가 가진 마지막 nft의 tokenId를 알려줌
-      // index는 내(넣은 주소)가 가진 nft의 번호, tokenId는 각 nft가 고유하게 가지고 있는 id
-      const tokenOfOwnerByIndex = await nftContract.methods
-        .tokenOfOwnerByIndex(account, parseInt(balanceOf) - 1)
-        .call();
+      // // tokenOfOwnerByIndex에서 주소와 index를 넣으면 내(넣은 주소)가 가진 마지막 nft의 tokenId를 알려줌
+      // // index는 내(넣은 주소)가 가진 nft의 번호, tokenId는 각 nft가 고유하게 가지고 있는 id
+      // const tokenOfOwnerByIndex = await nftContract.methods
+      //   .tokenOfOwnerByIndex(account, parseInt(balanceOf) - 1)
+      //   .call();
 
-      // tokenURI에 tokenId를 넣으면 해당 nft의 메타데이터 주소를 받을 수 있음
-      const tokenURI = await nftContract.methods
-        .tokenURI(parseInt(tokenOfOwnerByIndex))
-        .call();
+      // // tokenURI에 tokenId를 넣으면 해당 nft의 메타데이터 주소를 받을 수 있음
+      // const tokenURI = await nftContract.methods
+      //   .tokenURI(parseInt(tokenOfOwnerByIndex))
+      //   .call();
 
       // uri로부터 데이터 가져오기 - GET
-      const response = await axios.get(tokenURI);
+      const response = await axios.get(uri);
       setNftMetadata(response.data);
     } catch (error) {
       console.error(error);
@@ -133,6 +134,16 @@ function App() {
             {nftMetadata && (
               <div>
                 <img src={nftMetadata.image} alt="NFT" />
+                <div>Name : {nftMetadata.name}</div>
+                <div>Description : {nftMetadata.description}</div>
+                {nftMetadata.attributes.map((v, i) => {
+                  return (
+                    <div key={i}>
+                      <span>{v.trait_type} : </span>
+                      <span>{v.value}</span>
+                    </div>
+                  );
+                })}
               </div>
             )}
             <button className="ml-2 btn-style" onClick={onClickMint}>
