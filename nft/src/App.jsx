@@ -6,6 +6,7 @@ import {
   TOKEN_CONTRACT_ABI,
   TOKEN_CONTRACT_ADDRESS,
 } from "./web3.config";
+import axios from "axios";
 
 // web3 선언
 // const web3 = new Web3();
@@ -25,6 +26,7 @@ const nftContract = new web3.eth.Contract(
 function App() {
   const [account, setAccount] = useState("");
   const [myBalance, setMyBalance] = useState();
+  const [nftMetadata, setNftMetadata] = useState();
 
   // 메타마스크 있을 때 Proxy 출력, 없으면 undefined
   // useEffect(() => {
@@ -77,16 +79,38 @@ function App() {
         });
 
       console.log(result);
+      // false면 (민팅 안되었으면) 넘어가기
+      if (!result.status) return;
+
+      // 민팅한 nft 이미지를 화면에 보여주기 (정석?적인 방법) - 문제점 : 사용자가 응답 받는 시간이 느림.
+      // balanceOf에서 내(넣은 주소)가 가진 nft의 총 개수를 알 수 있음.
+      const balanceOf = await nftContract.methods.balanceOf(account).call();
+      // console.log(balanceOf);
+
+      // tokenOfOwnerByIndex에서 주소와 index를 넣으면 내(넣은 주소)가 가진 마지막 nft의 tokenId를 알려줌
+      // index는 내(넣은 주소)가 가진 nft의 번호, tokenId는 각 nft가 고유하게 가지고 있는 id
+      const tokenOfOwnerByIndex = await nftContract.methods
+        .tokenOfOwnerByIndex(account, parseInt(balanceOf) - 1)
+        .call();
+
+      // tokenURI에 tokenId를 넣으면 해당 nft의 메타데이터 주소를 받을 수 있음
+      const tokenURI = await nftContract.methods
+        .tokenURI(parseInt(tokenOfOwnerByIndex))
+        .call();
+
+      // uri로부터 데이터 가져오기 - GET
+      const response = await axios.get(tokenURI);
+      setNftMetadata(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   // web3 확인해보기
-  useEffect(() => {
-    console.log(web3);
-    console.log(tokenContract);
-  }, []);
+  // useEffect(() => {
+  //   console.log(web3);
+  //   console.log(tokenContract);
+  // }, []);
 
   return (
     <div className="bg-red-100 min-h-screen flex justify-center items-center">
@@ -106,6 +130,11 @@ function App() {
             </button>
           </div>
           <div className="flex items-center mt-4">
+            {nftMetadata && (
+              <div>
+                <img src={nftMetadata.image} alt="NFT" />
+              </div>
+            )}
             <button className="ml-2 btn-style" onClick={onClickMint}>
               민팅
             </button>
