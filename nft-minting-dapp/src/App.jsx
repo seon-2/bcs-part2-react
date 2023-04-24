@@ -21,7 +21,10 @@ function App() {
     <div className="bg-red-100 min-h-screen flex justify-center items-center">
       {/* account 있으면 account 화면에 출력, 아니면 로그인 버튼 화면에 출력 */}
       {account ? (
-        <div>{account}</div>
+        // 앞 뒤에 4글자, 나머지는 ...
+        <div>
+          {account.substring(0, 4)}...{account.substring(account.length - 4)}
+        </div>
       ) : (
         <button onClick={onClickAccount}>지갑로그인</button>
       )}
