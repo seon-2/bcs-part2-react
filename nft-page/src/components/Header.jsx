@@ -2,8 +2,12 @@ import { FaChessRook } from "react-icons/fa";
 import { BiWallet } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Header = ({ account, setAccount }) => {
+  const [coinPrice, setCoinPrice] = useState();
+
   // 지갑 로그인 기능
   const onClickAccount = async () => {
     try {
@@ -16,6 +20,30 @@ const Header = ({ account, setAccount }) => {
       console.error(error);
     }
   };
+
+  // 코인 가격 api로 받아오기
+  const getCoinPrice = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.upbit.com/v1/ticker?markets=KRW-BTC,%20KRW-ETH,%20KRW-MATIC"
+      );
+
+      setCoinPrice([
+        { symbol: "BTC", price: response.data[0].trade_price },
+        { symbol: "ETH", price: response.data[1].trade_price },
+        { symbol: "MATIC", price: response.data[2].trade_price },
+      ]);
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // useEffect로 잘 가져오는지 확인
+  useEffect(() => {
+    getCoinPrice();
+  }, []);
 
   return (
     <header className="max-w-screen-xl mx-auto p-4 flex justify-between items-center font-bold">
