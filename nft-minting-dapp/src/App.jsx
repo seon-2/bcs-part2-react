@@ -28,8 +28,26 @@ function App() {
   const onClickMint = async () => {
     try {
       const mintNft = await contract.methods.mintNft().send({ from: account });
+      // console.log(mintNft);
 
-      console.log(mintNft);
+      if (!mintNft.status) return;
+
+      // balanceOf(주소) -> 주소가 가진 nft 개수 반환
+      const balanceOf = await contract.methods.balanceOf(account).call();
+      console.log(balanceOf);
+
+      // tokenOfOwnerByIndex(주소, index) -> 주소가 가진 nft를 배열로 저장해놨는데, 그 배열[index]의 tokenId 반환
+      // 여기에서는 마지막 요소의 tokenId 반환
+      const tokenOfOwnerByIndex = await contract.methods
+        .tokenOfOwnerByIndex(account, parseInt(balanceOf) - 1)
+        .call();
+      console.log(tokenOfOwnerByIndex);
+
+      // tokenURI(tokenId) -> 해당 nft의 메타데이터 uri 반환
+      const tokenURI = await contract.methods
+        .tokenURI(tokenOfOwnerByIndex)
+        .call();
+      console.log(tokenURI);
     } catch (error) {
       console.error(error);
     }
