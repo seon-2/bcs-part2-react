@@ -5,7 +5,7 @@ import { CONTRACT_ADDRESS } from "../web3.config";
 const ranNum = Math.floor(Math.random() * 1000) + 1;
 const imgSrc = `${process.env.REACT_APP_IMAGE_URL}/${ranNum}.png`;
 
-const Intro = () => {
+const Intro = ({ totalNft }) => {
   return (
     <div className="bg-gradient-to-b from-transparent to-red-400 pt-10 ">
       <div className="max-w-screen-xl mx-auto">
@@ -34,6 +34,12 @@ const Intro = () => {
           사용되는 파일 형식 중 하나입니다. 이 파일은 소프트웨어 개발자들이
           프로젝트에서 사용되는 환경 변수(environment variable)를 저장하는 데
           사용됩니다.
+        </div>
+        <div className="py-4 text-center flex">
+          <div>
+            <div className="font-bold">{totalNft}</div>
+            <div className="text-gray-300">총 NFT</div>
+          </div>
         </div>
       </div>
     </div>
