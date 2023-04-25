@@ -3,6 +3,7 @@ import Intro from "../components/Intro";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../web3.config";
 import { useEffect } from "react";
 import { useState } from "react";
+import Nfts from "../components/Nfts";
 
 const web3 = new Web3(window.ethereum);
 const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
@@ -15,6 +16,8 @@ const Main = ({ account }) => {
   const [mintedNft, setMintedNft] = useState(0);
   // 내가 가진 nft 개수 받는 변수
   const [myNft, setMyNft] = useState(0);
+  // 페이지 수 받는 변수
+  const [page, setPage] = useState(1);
 
   // contract에서 전체 nft 개수 가져오기
   const getTotalNft = async () => {
@@ -39,6 +42,11 @@ const Main = ({ account }) => {
 
       setMintedNft(response);
       //   console.log(response);
+
+      // 페이지 계산
+      // 페이지 1~10 : 1페이지, 11~20 : 2페이지
+      // 10 - 1 = 9, 9 / 10 = 0, 0 + 1 = 1, 1페이지
+      setPage(parseInt((parseInt(response) - 1) / 10) + 1);
     } catch (error) {
       console.error(error);
     }
@@ -72,6 +80,7 @@ const Main = ({ account }) => {
   return (
     <div>
       <Intro totalNft={totalNft} mintedNft={mintedNft} myNft={myNft} />
+      <Nfts page={page} />
     </div>
   );
 };
