@@ -11,6 +11,7 @@ const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 const Main = ({ account }) => {
   // 전체 nft 개수 받는 변수
   const [totalNft, setTotalNft] = useState(0);
+  const [mintedNft, setMintedNft] = useState(0);
 
   // contract에서 전체 nft 개수 가져오기
   const getTotalNft = async () => {
@@ -26,14 +27,29 @@ const Main = ({ account }) => {
     }
   };
 
+  // contract에서 발행된 nft 개수 가져오기
+  const getMintedNft = async () => {
+    try {
+      if (!contract) return;
+
+      const response = await contract.methods.totalSupply().call();
+
+      setMintedNft(response);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // useEffect로 확인
   useEffect(() => {
     getTotalNft();
+    getMintedNft();
   }, []);
 
   return (
     <div>
-      <Intro totalNft={totalNft} />
+      <Intro totalNft={totalNft} mintedNft={mintedNft} />
     </div>
   );
 };
