@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Web3 from "web3";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "./web3.config";
+import axios from "axios";
 
 const web3 = new Web3(window.ethereum);
 // contract 선언 (abi, ca) 순서
@@ -10,6 +11,8 @@ const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 function App() {
   // 지갑주소 받는 변수
   const [account, setAccount] = useState("");
+  // uri로부터 가져온 nft 메타데이터 담는 변수
+  const [nftMetadata, setNftMetadata] = useState();
 
   // 지갑 연결(로그인)
   const onClickAccount = async () => {
@@ -48,6 +51,12 @@ function App() {
         .tokenURI(tokenOfOwnerByIndex)
         .call();
       console.log(tokenURI);
+
+      // uri로부터 데이터 가져오기 - GET
+      const response = await axios.get(tokenURI);
+      console.log(response);
+
+      setNftMetadata(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -61,6 +70,22 @@ function App() {
         <div>
           {account.substring(0, 4)}...{account.substring(account.length - 4)}
           <button onClick={onClickMint}>민팅</button>
+          {nftMetadata && (
+            <div>
+              <img src={nftMetadata.image} alt="NFT" />
+              <div>{nftMetadata.name}</div>
+              <div>{nftMetadata.description}</div>
+              <ul>
+                {nftMetadata.attributes.map((v, i) => {
+                  return (
+                    <li key={i}>
+                      {v.trait_type} - {v.value}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </div>
       ) : (
         <button onClick={onClickAccount}>지갑로그인</button>
