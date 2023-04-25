@@ -53,9 +53,20 @@ const Header = ({ account, setAccount }) => {
           <div className="ml-1 text-xl">Ble-Chess-3rd</div>
         </div>
       </Link>
-      <div>
+      <div className="flex items-center">
+        {coinPrice && (
+          <ul className="flex text-gray-400 text-sm">
+            {coinPrice.map((v, i) => {
+              return (
+                <li key={i} className="ml-2">
+                  {v.symbol}: {(v.price / 1000).toLocaleString()}K₩
+                </li>
+              );
+            })}
+          </ul>
+        )}
         {account ? (
-          <div className="flex items-center p-2 bg-gray-800 rounded-full">
+          <div className="flex items-center p-2 bg-gray-800 rounded-full ml-4">
             <div className="bg-main w-6 h-6 rounded-full flex justify-center items-center">
               <AiFillHeart />
             </div>
@@ -66,7 +77,7 @@ const Header = ({ account, setAccount }) => {
           </div>
         ) : (
           <button
-            className="flex items-center p-2 bg-gray-800 rounded-full"
+            className="flex items-center p-2 bg-gray-800 rounded-full ml-4"
             onClick={onClickAccount}
           >
             <div className="bg-main w-6 h-6 rounded-full flex justify-center items-center">
