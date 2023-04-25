@@ -9,6 +9,9 @@ const Intro = ({ totalNft, mintedNft, myNft }) => {
   return (
     <div className="bg-gradient-to-b from-transparent to-red-400 pt-10 ">
       <div className="max-w-screen-xl mx-auto">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-yellow-300 text-9xl truncate opacity-40 point-event-none">
+          Da Den Bu
+        </div>
         <div className="relative">
           <img
             className="absolute w-40 h-40 rounded-full"
