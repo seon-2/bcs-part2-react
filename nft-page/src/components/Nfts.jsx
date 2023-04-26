@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import NftCard from "./NftCard";
 
-const Nfts = ({ page }) => {
+const Nfts = ({ page, mintedNft }) => {
   // 현재 선택된 페이지 담는 변수
   const [selectedPage, setSelectedPage] = useState(1);
   const [nfts, setNfts] = useState();
@@ -91,7 +91,12 @@ const Nfts = ({ page }) => {
           nfts.map((v, i) => {
             // console.log(v);
             return (
-              <NftCard key={i} tokenId={v.tokenId} metadata={v.metadata} />
+              <NftCard
+                key={i}
+                tokenId={v.tokenId}
+                metadata={v.metadata}
+                mintedNft={mintedNft}
+              />
             );
           })
         ) : (
