@@ -34,7 +34,7 @@ const Header = ({ account, setAccount }) => {
         { symbol: "MATIC", price: response.data[2].trade_price },
       ]);
 
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.error(error);
     }

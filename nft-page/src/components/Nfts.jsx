@@ -49,9 +49,9 @@ const Nfts = ({ page, mintedNft }) => {
   };
 
   // page 잘 받아오는지 확인. 의존성배열 빈값으로 두면, useState 초기값만 들어옴
-  useEffect(() => {
-    console.log(page);
-  }, [page]);
+  // useEffect(() => {
+  // console.log(page);
+  // }, [page]);
 
   // page 숫자를 가져와서 숫자만큼 버튼 만들기. for문 사용
   const pageComp = () => {
@@ -79,9 +79,9 @@ const Nfts = ({ page, mintedNft }) => {
   }, []);
 
   // tokenId와 metadata가 담긴 nftArray 확인
-  useEffect(() => {
-    console.log(nfts);
-  }, [nfts]);
+  // useEffect(() => {
+  //   console.log(nfts);
+  // }, [nfts]);
 
   return (
     <div className="max-w-screen-xl mx-auto pt-4">
