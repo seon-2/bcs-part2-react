@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import NftCard from "./NftCard";
 
 const Nfts = ({ page }) => {
   // 현재 선택된 페이지 담는 변수
@@ -11,6 +12,8 @@ const Nfts = ({ page }) => {
   const getNfts = async (p) => {
     try {
       let nftArray = [];
+
+      setNfts();
 
       for (let i = 0; i < 10; i++) {
         // (p - 1) * 10 따로 i + 1 따로 생각하면 조금 편합니다.
@@ -41,6 +44,8 @@ const Nfts = ({ page }) => {
   // onClickPage = (p) => {} 이렇게 넣으면 안되는 이유는 p에 event가 들어가기 때문!
   const onClickPage = (p) => () => {
     setSelectedPage(p);
+    // 클릭했을 때 nft 불러오기
+    getNfts(p);
   };
 
   // page 잘 받아오는지 확인. 의존성배열 빈값으로 두면, useState 초기값만 들어옴
@@ -79,8 +84,20 @@ const Nfts = ({ page }) => {
   }, [nfts]);
 
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto pt-4">
       <div>{pageComp()}</div>
+      <ul className="mt-8 grid grid-cols-1 xl:grid-cols-2 justify-items-center gap-8">
+        {nfts ? (
+          nfts.map((v, i) => {
+            // console.log(v);
+            return (
+              <NftCard key={i} tokenId={v.tokenId} metadata={v.metadata} />
+            );
+          })
+        ) : (
+          <div>로딩중입니다...</div>
+        )}
+      </ul>
     </div>
   );
 };
